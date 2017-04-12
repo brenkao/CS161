@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/C16603/.android/build-cache/60842fdf8f60a51137a2928b10896a1972cb997c/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="a1ed98e01bd58976d80c062fd0ea2968a1ff68a1">
+        <dex dex="/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_e847fe7f3f0a0c55208c6ce3b35393a29f8763fb/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/C16603/.android/build-cache/bd4883138e8c0ffc066aa63a702febd3372c0343/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ecb496cc08dd52551fc5ec6db3bc0632e95a89bb">
+        <dex dex="/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_c81144b738e67b2291a86e7698f0d07376fbe4b1/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/C16603/.android/build-cache/e579ef6c8063fb726386b5dff8fbed4fad1277c1/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="7e92aadd0697922316d1395c1887a23aebec640a">
+        <dex dex="/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_bb3cf0abe640bf7eef9130392bccfe5a0eb8c46f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/C16603/.android/build-cache/09bee6c896b9b24d2d9a6eee6ecb1fb7c018f876/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="0fb891e8f0cfba0513043a7bb357513d229ca2cd">
+        <dex dex="/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_e9a5442d948c9c77174737ed1b463468202f5efb/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/C16603/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.7/751f548c85fa49f330cecbb1875893f971b33c4e/gson-2.7.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="751f548c85fa49f330cecbb1875893f971b33c4e">
+        <dex dex="/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/transforms/dex/debug/folders/1000/10/gson-2.7_4da1da60c6a842d8f9fff457cae624122cdbde5d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/C16603/.android/build-cache/72cb7c1833b4584f40351f66a4809e5866a356bc/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="bf2e1838e4428616c1aa26edf43de72b5b99bf84">
+        <dex dex="/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_041a1a2ee7e5c7ab4e7132808a2f66ae5579544a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/C16603/.android/build-cache/ed3d24ab22b718f705a9e47ebdc78afd1793ed49/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e2719c102dca3a7a5b02ce07f769362da6ddb4ab">
+        <dex dex="/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_902c1fd9f1f6b18cd97cdadca2df3da94a4f1799/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/C16603/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/25.3.0/support-annotations-25.3.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="dd84903d2e1af25a6081ef9038ad863cb14ca3a0">
+        <dex dex="/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-25.3.0_7a79c28947b45e0f0417885e117797e821b50972/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/C16603/.android/build-cache/563a8036a2da90fb0bc63abca914668c746c5794/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c03bf57f358aa10d253f21989e93bcf6014b3b17">
+        <dex dex="/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_c6ba123c9229baf73c3fe9a673883fae077e6624/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/C16603/.android/build-cache/efff69cf32665ffea79bb92923ed19dfc1fe0d80/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="aad07a374c48a359c774083dd608d7d8d48def05">
+        <dex dex="/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_c19a9c5124adfe6359db7514de5f676909655694/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/C16603/.android/build-cache/a275d077e6fbe6385151908c49f6385237338fb8/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="7521486d9bfd2cd9e756e0cf75ed7d97f2ce2d3b">
+        <dex dex="/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_739e844b9261bfafef40fd4c8be3326a7c8b2c63/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/C16603/.android/build-cache/4cdb087073a4a12a5ebd6cfcacdd35feeb4808a5/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_f9faf60d1f9c1beb91e5da1ea09f0e542b3bafe1/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/C16603/.android/build-cache/613b034287b54e90cf757364a78c6df88afbb878/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="9f6d236bac26d02b410e4ee186ba517ace5ee661">
+        <dex dex="/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d1cf3e1aaa9ac1a66649e80cd6cf8e0bcc77bc8d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/C16603/.android/build-cache/dabf82d9f63fefcd6268a8223673d7faff05ceb4/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3e04ac8ca644ea7baddf6fdcf72e15c79e9df94a">
+        <dex dex="/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_87073589184e39f763e077b8797101a5ded68cbc/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/C16603/.android/build-cache/c121f90818eb6e741f323c559d19a986fdd86aec/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ca851be26ff89f5b32cc222cee98139fb3fac830">
+        <dex dex="/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_69b3ce9edcf7fbbc7801c54b71f5ee37da962cd2/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e18f1c0d0ec552bbe515f5825345d4b6358ce56f">
+        <dex dex="/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_0812ea82ae20a2fa7fab1f3c0cb765b2619e8234/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/C16603/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/3.7.0/9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4/glide-3.7.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4">
+        <dex dex="/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/transforms/dex/debug/folders/1000/10/glide-3.7.0_6de489b7821d56cb431bb847b09cb9885fa06c04/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/C16603/.android/build-cache/744c203b4146c87f8b5f810e5bc5c4551f50cec7/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="7bde4c34162092e0a77e7f12dc85ed77c484cf5c">
+        <dex dex="/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_09f693445777296f53cd90078c216c84db60517f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/C16603/.android/build-cache/15989afae313a59e41fa6d5f3efa2a5927c13ee9/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="02741d05d4b697fba5e279e9881aaa1da0ca7c7f">
+        <dex dex="/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_fe025378d77fb3a2d0a312857873a1b3e4e3d807/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/C16603/.android/build-cache/3dc2daff8b5cdb783b5292cdb36fb61db9061d52/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="0d191c1a09e4892d059e5ce749e4ad4e08129e35">
+        <dex dex="/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_a16bbb072851500a17e8799f409e8f602b4a6fdd/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c82741bc129dd5f99f11a4ab8666ae24262053b6">
+        <dex dex="/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_d64fd39c079fc7578cb8e163e1ecd0950a137d4e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/C16603/.android/build-cache/6e2697109db3f4dc79660ff95c63565ab8298ffd/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c5d103b270b3f3b50d8e6b44aa8e068b0de33426">
+        <dex dex="/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_7156353b0f280f97019519fb606becb40b6eb748/classes.dex" />
+    </item>
+
+</items>

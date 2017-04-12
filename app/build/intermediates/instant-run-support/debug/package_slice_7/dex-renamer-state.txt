@@ -1,0 +1,4 @@
+#Tue Mar 28 22:29:29 PDT 2017
+base.0=/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_7
+renamed.0=classes.dex
+file.0=/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_7/classes.dex

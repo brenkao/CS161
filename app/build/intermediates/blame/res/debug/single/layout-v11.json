@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/res/merged/debug/layout-v11/notification_media_action.xml",
+        "source": "/Users/C16603/.android/build-cache/bd4883138e8c0ffc066aa63a702febd3372c0343/output/res/layout-v11/notification_media_action.xml"
+    },
+    {
+        "merged": "/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/res/merged/debug/layout-v11/notification_media_cancel_action.xml",
+        "source": "/Users/C16603/.android/build-cache/bd4883138e8c0ffc066aa63a702febd3372c0343/output/res/layout-v11/notification_media_cancel_action.xml"
+    },
+    {
+        "merged": "/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/res/merged/debug/layout-v11/notification_template_big_media.xml",
+        "source": "/Users/C16603/.android/build-cache/bd4883138e8c0ffc066aa63a702febd3372c0343/output/res/layout-v11/notification_template_big_media.xml"
+    },
+    {
+        "merged": "/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/res/merged/debug/layout-v11/notification_template_big_media_custom.xml",
+        "source": "/Users/C16603/.android/build-cache/bd4883138e8c0ffc066aa63a702febd3372c0343/output/res/layout-v11/notification_template_big_media_custom.xml"
+    },
+    {
+        "merged": "/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/res/merged/debug/layout-v11/notification_template_big_media_narrow_custom.xml",
+        "source": "/Users/C16603/.android/build-cache/bd4883138e8c0ffc066aa63a702febd3372c0343/output/res/layout-v11/notification_template_big_media_narrow_custom.xml"
+    },
+    {
+        "merged": "/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/res/merged/debug/layout-v11/notification_template_big_media_narrow.xml",
+        "source": "/Users/C16603/.android/build-cache/bd4883138e8c0ffc066aa63a702febd3372c0343/output/res/layout-v11/notification_template_big_media_narrow.xml"
+    }
+]

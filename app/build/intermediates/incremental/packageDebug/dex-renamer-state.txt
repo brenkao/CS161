@@ -1,0 +1,7 @@
+#Wed Mar 29 17:02:52 PDT 2017
+base.0=/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_0812ea82ae20a2fa7fab1f3c0cb765b2619e8234
+renamed.1=classes2.dex
+renamed.0=classes.dex
+file.1=/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_d64fd39c079fc7578cb8e163e1ecd0950a137d4e/classes.dex
+base.1=/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_d64fd39c079fc7578cb8e163e1ecd0950a137d4e
+file.0=/Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_0812ea82ae20a2fa7fab1f3c0cb765b2619e8234/classes.dex

@@ -1,0 +1,128 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/src/main/AndroidManifest.xml:2:1-24:12
+	package
+		ADDED from /Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/src/main/AndroidManifest.xml:3:5-40
+		INJECTED from /Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/src/main/AndroidManifest.xml:2:11-69
+	android:versionCode
+		INJECTED from /Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/src/main/AndroidManifest.xml
+uses-permission#android.permission.INTERNET
+ADDED from /Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/src/main/AndroidManifest.xml:5:5-66
+	android:name
+		ADDED from /Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/src/main/AndroidManifest.xml:5:22-64
+application
+ADDED from /Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/src/main/AndroidManifest.xml:7:5-21:19
+MERGED from [com.android.support:cardview-v7:25.3.0] /Users/C16603/.android/build-cache/6e2697109db3f4dc79660ff95c63565ab8298ffd/output/AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:appcompat-v7:25.1.1] /Users/C16603/.android/build-cache/bd4883138e8c0ffc066aa63a702febd3372c0343/output/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:animated-vector-drawable:25.1.1] /Users/C16603/.android/build-cache/3dc2daff8b5cdb783b5292cdb36fb61db9061d52/output/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-vector-drawable:25.1.1] /Users/C16603/.android/build-cache/563a8036a2da90fb0bc63abca914668c746c5794/output/AndroidManifest.xml:23:5-20
+MERGED from [com.google.android.gms:play-services-auth:9.8.0] /Users/C16603/.android/build-cache/c121f90818eb6e741f323c559d19a986fdd86aec/output/AndroidManifest.xml:19:5-25:19
+MERGED from [com.google.android.gms:play-services-base:9.8.0] /Users/C16603/.android/build-cache/e579ef6c8063fb726386b5dff8fbed4fad1277c1/output/AndroidManifest.xml:18:5-20:19
+MERGED from [com.google.android.gms:play-services-tasks:9.8.0] /Users/C16603/.android/build-cache/72cb7c1833b4584f40351f66a4809e5866a356bc/output/AndroidManifest.xml:4:5-19
+MERGED from [com.google.android.gms:play-services-basement:9.8.0] /Users/C16603/.android/build-cache/613b034287b54e90cf757364a78c6df88afbb878/output/AndroidManifest.xml:19:5-21:19
+MERGED from [com.android.support:support-v4:25.1.1] /Users/C16603/.android/build-cache/4cdb087073a4a12a5ebd6cfcacdd35feeb4808a5/output/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-fragment:25.1.1] /Users/C16603/.android/build-cache/ed3d24ab22b718f705a9e47ebdc78afd1793ed49/output/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-media-compat:25.1.1] /Users/C16603/.android/build-cache/744c203b4146c87f8b5f810e5bc5c4551f50cec7/output/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:25.1.1] /Users/C16603/.android/build-cache/dabf82d9f63fefcd6268a8223673d7faff05ceb4/output/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-utils:25.1.1] /Users/C16603/.android/build-cache/09bee6c896b9b24d2d9a6eee6ecb1fb7c018f876/output/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:25.1.1] /Users/C16603/.android/build-cache/15989afae313a59e41fa6d5f3efa2a5927c13ee9/output/AndroidManifest.xml:25:5-20
+	android:label
+		ADDED from /Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/src/main/AndroidManifest.xml:10:9-41
+	android:supportsRtl
+		ADDED from /Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/src/main/AndroidManifest.xml:11:9-35
+	android:allowBackup
+		ADDED from /Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/src/main/AndroidManifest.xml:8:9-35
+	android:icon
+		ADDED from /Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/src/main/AndroidManifest.xml:9:9-43
+	android:theme
+		ADDED from /Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/src/main/AndroidManifest.xml:12:9-40
+activity#com.example.jason.fooder1.MainActivity
+ADDED from /Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/src/main/AndroidManifest.xml:13:9-19:20
+	android:name
+		ADDED from /Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/src/main/AndroidManifest.xml:13:19-47
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from /Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/src/main/AndroidManifest.xml:14:13-18:29
+action#android.intent.action.MAIN
+ADDED from /Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/src/main/AndroidManifest.xml:15:17-69
+	android:name
+		ADDED from /Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/src/main/AndroidManifest.xml:15:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/src/main/AndroidManifest.xml:17:17-77
+	android:name
+		ADDED from /Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/src/main/AndroidManifest.xml:17:27-74
+activity#com.example.jason.fooder1.LoginPage
+ADDED from /Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/src/main/AndroidManifest.xml:20:9-46
+	android:name
+		ADDED from /Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/src/main/AndroidManifest.xml:20:19-44
+uses-sdk
+INJECTED from /Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.mindorks:placeholderview:0.2.7] /Users/C16603/.android/build-cache/efff69cf32665ffea79bb92923ed19dfc1fe0d80/output/AndroidManifest.xml:8:5-10:41
+MERGED from [com.android.support:recyclerview-v7:24.2.1] /Users/C16603/.android/build-cache/a275d077e6fbe6385151908c49f6385237338fb8/output/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:cardview-v7:25.3.0] /Users/C16603/.android/build-cache/6e2697109db3f4dc79660ff95c63565ab8298ffd/output/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:appcompat-v7:25.1.1] /Users/C16603/.android/build-cache/bd4883138e8c0ffc066aa63a702febd3372c0343/output/AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:animated-vector-drawable:25.1.1] /Users/C16603/.android/build-cache/3dc2daff8b5cdb783b5292cdb36fb61db9061d52/output/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:25.1.1] /Users/C16603/.android/build-cache/563a8036a2da90fb0bc63abca914668c746c5794/output/AndroidManifest.xml:21:5-43
+MERGED from [com.google.android.gms:play-services-auth:9.8.0] /Users/C16603/.android/build-cache/c121f90818eb6e741f323c559d19a986fdd86aec/output/AndroidManifest.xml:17:5-42
+MERGED from [com.google.android.gms:play-services-auth-base:9.8.0] /Users/C16603/.android/build-cache/60842fdf8f60a51137a2928b10896a1972cb997c/output/AndroidManifest.xml:4:5-42
+MERGED from [com.google.android.gms:play-services-base:9.8.0] /Users/C16603/.android/build-cache/e579ef6c8063fb726386b5dff8fbed4fad1277c1/output/AndroidManifest.xml:17:5-42
+MERGED from [com.google.android.gms:play-services-tasks:9.8.0] /Users/C16603/.android/build-cache/72cb7c1833b4584f40351f66a4809e5866a356bc/output/AndroidManifest.xml:3:5-42
+MERGED from [com.google.android.gms:play-services-basement:9.8.0] /Users/C16603/.android/build-cache/613b034287b54e90cf757364a78c6df88afbb878/output/AndroidManifest.xml:17:5-42
+MERGED from [com.android.support:support-v4:25.1.1] /Users/C16603/.android/build-cache/4cdb087073a4a12a5ebd6cfcacdd35feeb4808a5/output/AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-fragment:25.1.1] /Users/C16603/.android/build-cache/ed3d24ab22b718f705a9e47ebdc78afd1793ed49/output/AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-media-compat:25.1.1] /Users/C16603/.android/build-cache/744c203b4146c87f8b5f810e5bc5c4551f50cec7/output/AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-ui:25.1.1] /Users/C16603/.android/build-cache/dabf82d9f63fefcd6268a8223673d7faff05ceb4/output/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:25.1.1] /Users/C16603/.android/build-cache/09bee6c896b9b24d2d9a6eee6ecb1fb7c018f876/output/AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-compat:25.1.1] /Users/C16603/.android/build-cache/15989afae313a59e41fa6d5f3efa2a5927c13ee9/output/AndroidManifest.xml:21:5-23:58
+	tools:overrideLibrary
+		ADDED from [com.android.support:appcompat-v7:25.1.1] /Users/C16603/.android/build-cache/bd4883138e8c0ffc066aa63a702febd3372c0343/output/AndroidManifest.xml:23:9-75
+	android:targetSdkVersion
+		INJECTED from /Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/C16603/Dropbox/School/CS 161/cs161/CS161/app/src/main/AndroidManifest.xml
+meta-data#android.support.VERSION
+ADDED from [com.android.support:cardview-v7:25.3.0] /Users/C16603/.android/build-cache/6e2697109db3f4dc79660ff95c63565ab8298ffd/output/AndroidManifest.xml:22:5-24:34
+	android:value
+		ADDED from [com.android.support:cardview-v7:25.3.0] /Users/C16603/.android/build-cache/6e2697109db3f4dc79660ff95c63565ab8298ffd/output/AndroidManifest.xml:24:9-31
+	android:name
+		ADDED from [com.android.support:cardview-v7:25.3.0] /Users/C16603/.android/build-cache/6e2697109db3f4dc79660ff95c63565ab8298ffd/output/AndroidManifest.xml:23:9-47
+activity#com.google.android.gms.auth.api.signin.internal.SignInHubActivity
+ADDED from [com.google.android.gms:play-services-auth:9.8.0] /Users/C16603/.android/build-cache/c121f90818eb6e741f323c559d19a986fdd86aec/output/AndroidManifest.xml:20:9-189
+	android:excludeFromRecents
+		ADDED from [com.google.android.gms:play-services-auth:9.8.0] /Users/C16603/.android/build-cache/c121f90818eb6e741f323c559d19a986fdd86aec/output/AndroidManifest.xml:20:129-162
+	android:exported
+		ADDED from [com.google.android.gms:play-services-auth:9.8.0] /Users/C16603/.android/build-cache/c121f90818eb6e741f323c559d19a986fdd86aec/output/AndroidManifest.xml:20:163-187
+	android:theme
+		ADDED from [com.google.android.gms:play-services-auth:9.8.0] /Users/C16603/.android/build-cache/c121f90818eb6e741f323c559d19a986fdd86aec/output/AndroidManifest.xml:20:69-128
+	android:name
+		ADDED from [com.google.android.gms:play-services-auth:9.8.0] /Users/C16603/.android/build-cache/c121f90818eb6e741f323c559d19a986fdd86aec/output/AndroidManifest.xml:20:19-68
+service#com.google.android.gms.auth.api.signin.RevocationBoundService
+ADDED from [com.google.android.gms:play-services-auth:9.8.0] /Users/C16603/.android/build-cache/c121f90818eb6e741f323c559d19a986fdd86aec/output/AndroidManifest.xml:24:9-184
+	android:exported
+		ADDED from [com.google.android.gms:play-services-auth:9.8.0] /Users/C16603/.android/build-cache/c121f90818eb6e741f323c559d19a986fdd86aec/output/AndroidManifest.xml:24:64-87
+	android:permission
+		ADDED from [com.google.android.gms:play-services-auth:9.8.0] /Users/C16603/.android/build-cache/c121f90818eb6e741f323c559d19a986fdd86aec/output/AndroidManifest.xml:24:88-182
+	android:name
+		ADDED from [com.google.android.gms:play-services-auth:9.8.0] /Users/C16603/.android/build-cache/c121f90818eb6e741f323c559d19a986fdd86aec/output/AndroidManifest.xml:24:18-63
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:9.8.0] /Users/C16603/.android/build-cache/e579ef6c8063fb726386b5dff8fbed4fad1277c1/output/AndroidManifest.xml:19:9-172
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:9.8.0] /Users/C16603/.android/build-cache/e579ef6c8063fb726386b5dff8fbed4fad1277c1/output/AndroidManifest.xml:19:146-170
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:9.8.0] /Users/C16603/.android/build-cache/e579ef6c8063fb726386b5dff8fbed4fad1277c1/output/AndroidManifest.xml:19:86-145
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:9.8.0] /Users/C16603/.android/build-cache/e579ef6c8063fb726386b5dff8fbed4fad1277c1/output/AndroidManifest.xml:19:19-85
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:9.8.0] /Users/C16603/.android/build-cache/613b034287b54e90cf757364a78c6df88afbb878/output/AndroidManifest.xml:20:9-121
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:9.8.0] /Users/C16603/.android/build-cache/613b034287b54e90cf757364a78c6df88afbb878/output/AndroidManifest.xml:20:66-119
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:9.8.0] /Users/C16603/.android/build-cache/613b034287b54e90cf757364a78c6df88afbb878/output/AndroidManifest.xml:20:20-65
