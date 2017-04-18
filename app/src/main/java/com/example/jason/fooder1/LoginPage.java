@@ -60,9 +60,9 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
             case R.id.bn_login:
                 signIn();
                 break;
-            case R.id.bn_logout:
-                signOut();
-                break;
+            //case R.id.bn_logout:
+              //  signOut();
+                //break;
         }
     }
 
@@ -98,13 +98,14 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
             Name.setText(name);
             Email.setText(email);
             Glide.with(this).load(img_url).into(Prof_Pic);
-            //updateUI(true);
+            updateUI(true);
             startActivity(new Intent(LoginPage.this, MainActivity.class));
         }
 
         else
         {
-            updateUI(false);
+            //updateUI(false);
+            startActivity(new Intent(LoginPage.this, MainActivity.class));
         }
     }
 
