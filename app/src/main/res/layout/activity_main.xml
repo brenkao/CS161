@@ -17,18 +17,20 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@drawable/ic_cancel"/>
-        <ImageButton
-            android:id="@+id/acceptBtn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/ic_map"/>
+
         <ImageButton
             android:id="@+id/mapBtn"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="30dp"
-            android:background="@drawable/ic_heart"/>
+            android:background="@drawable/ic_map" />
+
+        <ImageButton
+            android:id="@+id/acceptBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="30dp"
+            android:background="@drawable/ic_heart" />
 
         <ImageView
             android:layout_width="63dp"
