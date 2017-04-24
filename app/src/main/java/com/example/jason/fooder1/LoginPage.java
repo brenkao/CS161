@@ -94,10 +94,12 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
             GoogleSignInAccount account = result.getSignInAccount();
             String name = account.getDisplayName();
             String email = account.getEmail();
-            String img_url = account.getPhotoUrl().toString();
+            if(account.getPhotoUrl() != null) {
+                String img_url = account.getPhotoUrl().toString();
+                Glide.with(this).load(img_url).into(Prof_Pic);
+            }
             Name.setText(name);
             Email.setText(email);
-            Glide.with(this).load(img_url).into(Prof_Pic);
             updateUI(true);
             startActivity(new Intent(LoginPage.this, MainActivity.class));
         }
