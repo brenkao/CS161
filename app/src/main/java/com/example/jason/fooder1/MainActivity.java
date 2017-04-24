@@ -1,11 +1,9 @@
 package com.example.jason.fooder1;
 
-import android.graphics.drawable.Drawable;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
 import android.content.Context;
 import android.graphics.Point;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -32,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         mSwipeView = (SwipePlaceHolderView)findViewById(R.id.swipeView);
         mContext = getApplicationContext();
 
+        getSupportActionBar().setTitle("Welcome! " + LoginPage.Name.getText());
         int bottomMargin = Utils.dpToPx(160);
         Point windowSize = Utils.getDisplaySize(getWindowManager());
         mSwipeView.getBuilder()

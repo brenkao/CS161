@@ -30,7 +30,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     private LinearLayout Prof_Section;
     private Button SignOut;
     private SignInButton SignIn;
-    private TextView Name, Email;
+    public static TextView Name, Email;
     private ImageView Prof_Pic;
     private GoogleApiClient googleApiClient;
     private static final int REQ_CODE = 9001;
