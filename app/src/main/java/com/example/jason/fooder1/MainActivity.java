@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
@@ -19,16 +20,26 @@ public class MainActivity extends AppCompatActivity {
     private SwipePlaceHolderView mSwipeView;
     private Context mContext;
     private ImageView Prof_Pic2;
+    private String myName;
+    private String myEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.drawable.ic_icon);
+
+        Bundle info = getIntent().getExtras();
+        if(info != null) {
+            myName = info.getString("myName");
+            myEmail = info.getString("myEmail");
+        }
+
+        Toast.makeText(MainActivity.this, "Welcome " + myName,
+                Toast.LENGTH_SHORT).show();
 
         //Prof_Pic2 = (ImageView)findViewById(R.id.prof_pic2);
         //Prof_Pic2.setImageDrawable(LoginPage.Prof_Pic.getDrawable());
@@ -54,10 +65,6 @@ public class MainActivity extends AppCompatActivity {
         for(Profile profile : Utils.loadProfiles(this.getApplicationContext())){
             mSwipeView.addView(new TinderCard(mContext, profile, mSwipeView));
         }
-
-
-
-
 
         findViewById(R.id.rejectBtn).setOnClickListener(new View.OnClickListener() {
             @Override

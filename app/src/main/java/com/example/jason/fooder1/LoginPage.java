@@ -32,12 +32,20 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 /**
  * Created by Jason on 3/15/2017.
+ * Modified by Jake 4/24/2017
  */
 
 public class LoginPage extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
     private static final String TAG = "GoogleActivity";
     private static final int RC_SIGN_IN = 9001;
+
+    private LinearLayout Prof_Section;
+    private Button SignOut;
+    private SignInButton SignIn;
+    public static TextView Name, Email;
+    private ImageView Prof_Pic;
+    private GoogleApiClient googleApiClient;
 
     // [START declare_auth]
     private FirebaseAuth mAuth;
@@ -51,7 +59,17 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_screen);
+        setContentView(R.layout.login_screen);
 
+        Prof_Section = (LinearLayout)findViewById(R.id.prof_section);
+        SignIn = (SignInButton)findViewById(R.id.bn_login);
+        SignOut = (Button)findViewById(R.id.bn_logout);
+        Name = (TextView)findViewById(R.id.name);
+        Email = (TextView)findViewById(R.id.email);
+        Prof_Pic = (ImageView)findViewById(R.id.prof_pic);
+        SignIn.setOnClickListener(this);
+        SignOut.setOnClickListener(this);
+        Prof_Section.setVisibility(View.GONE);
         // Views
         //mStatusTextView = (TextView) findViewById(R.id.status);
         //mDetailTextView = (TextView) findViewById(R.id.detail);
@@ -101,6 +119,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
+                handleResult(result);
             } else {
                 // Google Sign In failed, update UI appropriately
                 // [START_EXCLUDE]
@@ -206,14 +225,45 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
     }
 
+    private void handleResult(GoogleSignInResult result) {
+
+        String name = null;
+        String email = null;
+
+        if(result.isSuccess()) {
+            GoogleSignInAccount account = result.getSignInAccount();
+            name = account.getDisplayName();
+            email = account.getEmail();
+            if (account.getPhotoUrl() != null) {
+                String img_url = account.getPhotoUrl().toString();
+                Glide.with(this).load(img_url).into(Prof_Pic);
+            }
+            Name.setText(name);
+            Email.setText(email);
+
+            //updateUI(true);
+
+        } else {
+            //updateUI(false);
+        }
+
+        Intent intent = new Intent(LoginPage.this, MainActivity.class);
+        Bundle info = new Bundle();
+        info.putString("myName", name);
+        info.putString("myEmail", email);
+        intent.putExtras(info); //Put your id to your next Intent
+        startActivity(intent);
+    }
+
     @Override
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.bn_login) {
             signIn();
-        }
+        } /**
         if (i == R.id.bn_login) {
             signOut();
-        }
+            revokeAccess();
+        }**/
     }
 }
