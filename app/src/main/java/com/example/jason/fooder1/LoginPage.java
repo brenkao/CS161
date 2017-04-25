@@ -30,7 +30,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     private LinearLayout Prof_Section;
     private Button SignOut;
     private SignInButton SignIn;
-    private TextView Name, Email;
+    public static TextView Name, Email;
     public static ImageView Prof_Pic;
     private GoogleApiClient googleApiClient;
     private static final int REQ_CODE = 9001;
@@ -102,8 +102,8 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
             Name.setText(name);
             Email.setText(email);
             Glide.with(this).load(img_url).into(Prof_Pic);
-            //updateUI(true);
-            startActivity(new Intent(LoginPage.this, MainActivity.class));
+            updateUI(true);
+            //startActivity(new Intent(LoginPage.this, MainActivity.class));
         }
 
         else
@@ -116,8 +116,9 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     {
         if (isLogin)
         {
-            Prof_Section.setVisibility(View.VISIBLE);
-            SignIn.setVisibility(View.GONE);
+            //Prof_Section.setVisibility(View.VISIBLE);
+            //SignIn.setVisibility(View.GONE);
+            startActivity(new Intent(LoginPage.this, MainActivity.class));
 
         }
         else
