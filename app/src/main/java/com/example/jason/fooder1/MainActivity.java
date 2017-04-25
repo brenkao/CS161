@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.drawable.ic_icon);
 
-        Prof_Pic2 = (ImageView)findViewById(R.id.prof_pic2);
-        Prof_Pic2.setImageDrawable(LoginPage.Prof_Pic.getDrawable());
+        //Prof_Pic2 = (ImageView)findViewById(R.id.prof_pic2);
+        //Prof_Pic2.setImageDrawable(LoginPage.Prof_Pic.getDrawable());
 
 
         mSwipeView = (SwipePlaceHolderView)findViewById(R.id.swipeView);
