@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
                 if(firebaseAuth.getCurrentUser() == null) {
                     startActivity(new Intent(MainActivity.this, LoginPage.class));
                 }
-
             }
         };
 
@@ -73,7 +73,8 @@ public class MainActivity extends AppCompatActivity {
                 Toast.LENGTH_SHORT).show();
 
         //Prof_Pic2 = (ImageView)findViewById(R.id.prof_pic2);
-        //Prof_Pic2.setImageDrawable(LoginPage.Prof_Pic.getDrawable());
+        //Prof_Pic2.setImageDrawable();
+        //Prof_Pic2.setImageDrawable(MainActivity.Prof_Pic.getDrawable());
 
         mSwipeView = (SwipePlaceHolderView) findViewById(R.id.swipeView);
         mContext = getApplicationContext();
