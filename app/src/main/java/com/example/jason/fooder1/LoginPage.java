@@ -241,10 +241,6 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         }
 
         Intent intent = new Intent(LoginPage.this, MainActivity.class);
-        Bundle info = new Bundle();
-        info.putString("myName", name);
-        info.putString("myEmail", email);
-        intent.putExtras(info); //Put your id to your next Intent
         startActivity(intent);
     }
 

@@ -51,6 +51,10 @@ public class TinderCard {
         locationNameTxt.setText(mProfile.getLocation());
     }
 
+    public String getName() {
+        return mProfile.getName();
+    }
+
     @SwipeOut
     private void onSwipedOut(){
         Log.d("EVENT", "onSwipedOut");

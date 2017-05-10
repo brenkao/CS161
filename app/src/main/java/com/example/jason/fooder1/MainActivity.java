@@ -12,12 +12,16 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
+
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +31,15 @@ public class MainActivity extends AppCompatActivity {
     private String myName;
     private String myEmail;
     private Button logOutButton;
+    private Button bucketList_btn;
+    private TextView userName;
+
+    private String test;
+    private String temp;
+    private int counter;
+
+    private ArrayList myList;
+    private TextView bucketList_text;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -52,8 +65,13 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
+        mSwipeView = (SwipePlaceHolderView) findViewById(R.id.swipeView);
+        mContext = getApplicationContext();
+        userName = (TextView) findViewById(R.id.u_name);
+        test = temp = "";
+        counter = 0;
+        bucketList_text = (TextView) findViewById(R.id.bList_text);
         logOutButton = (Button) findViewById(R.id.bn_logout);
-
         logOutButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -62,22 +80,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Grabs user info from login
-        Bundle info = getIntent().getExtras();
-        if (info != null) {
-            myName = info.getString("myName");
-            myEmail = info.getString("myEmail");
-        }
+        // Get current user's display name
+        userName.setText(mAuth.getCurrentUser().getDisplayName());
 
-        Toast.makeText(MainActivity.this, "Welcome " + myName,
-                Toast.LENGTH_SHORT).show();
-
-        //Prof_Pic2 = (ImageView)findViewById(R.id.prof_pic2);
+        //Prof_Pic2.setImageDrawable(mAuth.getCurrentUser().getPhotoUrl());
         //Prof_Pic2.setImageDrawable();
-        //Prof_Pic2.setImageDrawable(MainActivity.Prof_Pic.getDrawable());
-
-        mSwipeView = (SwipePlaceHolderView) findViewById(R.id.swipeView);
-        mContext = getApplicationContext();
 
         int bottomMargin = Utils.dpToPx(160);
         Point windowSize = Utils.getDisplaySize(getWindowManager());
@@ -93,21 +100,39 @@ public class MainActivity extends AppCompatActivity {
                         .setSwipeOutMsgLayoutId(R.layout.tinder_swipe_out_msg_view));
 
 
+        myList = new ArrayList();
+
         for (Profile profile : Utils.loadProfiles(this.getApplicationContext())) {
-            mSwipeView.addView(new TinderCard(mContext, profile, mSwipeView));
+            // Creating the card like this so I can pull out individual attributes
+            TinderCard asdf = new TinderCard(mContext, profile, mSwipeView);
+            myList.add(asdf.getName());
+            mSwipeView.addView(asdf);
         }
 
         findViewById(R.id.rejectBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mSwipeView.doSwipe(false);
+                counter++;
             }
         });
 
         findViewById(R.id.acceptBtn).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { mSwipeView.doSwipe(true); }
+            public void onClick(View v) {
+                mSwipeView.doSwipe(true);
+
+                // If swipped yes, add the card to the list
+                test += temp + "\n";
+                counter++;
+                test += myList.get(counter).toString() + "\n";
+                update();
+            }
         });
+    }
+
+    public void update() {
+        bucketList_text.setText(test);
     }
 
     @Override
@@ -115,5 +140,13 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    // Doesn't work yet
+    public void change() {
+        Toast.makeText(MainActivity.this, "Button Pressed",
+                Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, BucketList.class);
+        startActivity(intent);
     }
 }
