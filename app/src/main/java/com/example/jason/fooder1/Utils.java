@@ -5,6 +5,7 @@ import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
@@ -28,16 +29,19 @@ public class Utils {
 
     private static final String TAG = "Utils";
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static List<Profile> loadProfiles(Context context){
         try{
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
+
             JSONArray array = new JSONArray(loadJSONFromAsset(context, "profiles.json"));
             List<Profile> profileList = new ArrayList<>();
             for(int i=0;i<array.length();i++){
                 Profile profile = gson.fromJson(array.getString(i), Profile.class);
                 profileList.add(profile);
             }
+
             return profileList;
         }catch (Exception e){
             e.printStackTrace();

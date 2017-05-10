@@ -1,6 +1,6 @@
-package com.nwu.yelpapi;
+package com.example.jason.fooder1;
 
-import com.nwu.yelpapi.pojo.AccessToken;
+import com.example.jason.fooder1.pojo.AccessToken;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
