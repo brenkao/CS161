@@ -7,14 +7,12 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.example.jason.fooder1.pojo.AccessToken;
 import com.example.jason.fooder1.pojo.Business;
-import com.google.gson.Gson;
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 
@@ -95,15 +93,14 @@ public class MainActivity extends AppCompatActivity {
             final YelpV3API yelp = factory.getAPI(accessToken.access_token);
             final Call<Business> businessCall = yelp.business(SAMPLE_BUSINESS_ID, null);
             business = businessCall.execute().body();
-            final Gson gson = new Gson();
-            Log.d("test", String.valueOf((gson.toJson(business))));
-            //businessList.add(gson.toJson(business));
+            //Log.d("test", business.location.display_address);
+            businessList.add(business);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for(Business profile : businessList){
-            mSwipeView.addView(new TinderCard(mContext, profile, mSwipeView));
+        for(Business bus: businessList){
+            mSwipeView.addView(new TinderCard(mContext, bus, mSwipeView));
         }
 
         findViewById(R.id.rejectBtn).setOnClickListener(new View.OnClickListener() {

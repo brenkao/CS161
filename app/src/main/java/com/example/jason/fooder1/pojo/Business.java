@@ -9,17 +9,19 @@ public class Business implements Serializable {
    public final Location location;
    public final String name;
    public final String price;
+   public final String image_url;
    public final double rating;
 
    //---------------------------------------------------------------------------
    public Business(Coordinates coordinates,
                    Location location, String name,
-                   String price, double rating) {
+                   String price, String image_url, double rating) {
       this.coordinates = coordinates;
       this.location = location;
       this.name = name;
       this.price = price;
       this.rating = rating;
+      this.image_url = image_url;
    }
 
    //---------------------------------------------------------------------------

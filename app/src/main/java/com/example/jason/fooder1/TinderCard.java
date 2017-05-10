@@ -6,10 +6,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.jason.fooder1.pojo.Business;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
-import com.mindorks.placeholderview.annotations.Click;
 import com.mindorks.placeholderview.annotations.Layout;
-import com.mindorks.placeholderview.annotations.NonReusable;
 import com.mindorks.placeholderview.annotations.Resolve;
 import com.mindorks.placeholderview.annotations.View;
 import com.mindorks.placeholderview.annotations.swipe.SwipeCancelState;
@@ -34,21 +33,21 @@ public class TinderCard {
     @View(R.id.locationNameTxt)
     private TextView locationNameTxt;
 
-    private Profile mProfile;
+    private Business mBusiness;
     private Context mContext;
     private SwipePlaceHolderView mSwipeView;
 
-    public TinderCard(Context context, Business profile, SwipePlaceHolderView swipeView) {
+    public TinderCard(Context context, Business bus, SwipePlaceHolderView swipeView) {
         mContext = context;
-        mProfile = profile;
+        mBusiness = bus;
         mSwipeView = swipeView;
     }
 
     @Resolve
     private void onResolved(){
-        Glide.with(mContext).load(mProfile.getImageUrl()).into(profileImageView);
-        namePriceTxt.setText(mProfile.getName() + ", " + mProfile.getPrice());
-        locationNameTxt.setText(mProfile.getLocation());
+        Glide.with(mContext).load(mBusiness.image_url).into(profileImageView);
+        namePriceTxt.setText(mBusiness.name + ", " + mBusiness.price);
+      //  locationNameTxt.setText(mBusiness.location.display_address);
     }
 
     @SwipeOut
