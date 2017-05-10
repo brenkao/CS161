@@ -6,8 +6,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.jason.fooder1.pojo.SearchResponse;
-import com.google.gson.Gson;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 import com.mindorks.placeholderview.annotations.Layout;
 import com.mindorks.placeholderview.annotations.Resolve;
@@ -18,7 +16,6 @@ import com.mindorks.placeholderview.annotations.swipe.SwipeInState;
 import com.mindorks.placeholderview.annotations.swipe.SwipeOut;
 import com.mindorks.placeholderview.annotations.swipe.SwipeOutState;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -38,44 +35,40 @@ public class TinderCard {
     @View(R.id.locationNameTxt)
     private TextView locationNameTxt;
 
-    private SearchResponse mBusiness;
+    private String mBusiness;
     private Context mContext;
     private SwipePlaceHolderView mSwipeView;
+    private String business;
+    private JSONObject mBusiness2;
+    private JSONObject getAddress;
+    private static JSONObject getCoord;
 
-    public TinderCard(Context context, SearchResponse bus, SwipePlaceHolderView swipeView) {
+    public TinderCard(Context context, String bus, SwipePlaceHolderView swipeView) throws JSONException {
         mContext = context;
         mBusiness = bus;
         mSwipeView = swipeView;
+
+        mBusiness2 = new JSONObject(mBusiness);
+        String getLocation = mBusiness2.getString("location");
+        getAddress = new JSONObject(getLocation);
+        String getCoordinates = mBusiness2.getString("coordinates");
+        getCoord = new JSONObject((getCoordinates));
+
     }
 
     @Resolve
     private void onResolved() throws JSONException{
-        Gson gson = new Gson();
-        String business = gson.toJson(mBusiness);
 
-        JSONObject jsonObject = new JSONObject(business);
-       // Log.d("test", jsonObject.toString());
-        JSONArray getBusinesses = jsonObject.getJSONArray("businesses");
-        //Log.d("test", getBusinesses.toString());
-        String businessString = jsonObject.getString("businesses");
-        String nameString = getBusinesses.getJSONObject(0).getString("name");
-        String imgString = getBusinesses.getJSONObject(0).getString("image_url");
-        String priceString = getBusinesses.getJSONObject(0).getString("price");
-        String getLocation = getBusinesses.getJSONObject(0).getString("location");
-        JSONObject getAddress = new JSONObject(getLocation);
-        String location = getAddress.getString("display_address");
-        Log.d("test", location);
-        //String address = getLocation.getJSONObject(0).getString("display_address");
 
-        Glide.with(mContext).load(imgString).into(profileImageView);
-        namePriceTxt.setText(nameString + ", " + priceString);
-        locationNameTxt.setText(location);
+        Glide.with(mContext).load(mBusiness2.getString("image_url")).into(profileImageView);
+        namePriceTxt.setText(mBusiness2.getString("name") + ", " + mBusiness2.getString("price"));
+        locationNameTxt.setText(getAddress.getString("display_address"));
+
     }
 
-    @SwipeOut
-    private void onSwipedOut(){
-        Log.d("EVENT", "onSwipedOut");
-        mSwipeView.addView(this);
+    @SwipeIn
+    private void onSwipeIn() {
+        Log.d("EVENT", "onSwipedIn");
     }
 
     @SwipeCancelState
@@ -83,12 +76,8 @@ public class TinderCard {
         Log.d("EVENT", "onSwipeCancelState");
     }
 
-    @SwipeIn
-
-    private void onSwipeIn(){
-        Log.d("EVENT", "onSwipedIn");
-    }
-
+    @SwipeOut
+    private void onSwipedOut(){ Log.d("EVENT", "onSwipedOut"); }
     @SwipeInState
     private void onSwipeInState(){
         Log.d("EVENT", "onSwipeInState");
@@ -97,5 +86,12 @@ public class TinderCard {
     @SwipeOutState
     private void onSwipeOutState(){
         Log.d("EVENT", "onSwipeOutState");
+    }
+
+    public static double getLongitude() throws JSONException{
+        return getCoord.getDouble("longitude");
+    }
+    public static double getLatitude() throws JSONException{
+        return getCoord.getDouble("latitude");
     }
 }
