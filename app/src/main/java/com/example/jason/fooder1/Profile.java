@@ -13,7 +13,7 @@ public class Profile {
     @Expose
     private String name;
 
-    @SerializedName("url")
+    @SerializedName("image_url")
     @Expose
     private String imageUrl;
 
@@ -37,23 +37,15 @@ public class Profile {
         return imageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
 
     public String getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
-    }
 
     public String getLocation() {
         return location;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
+
 }

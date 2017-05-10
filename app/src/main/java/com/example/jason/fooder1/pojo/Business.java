@@ -24,6 +24,9 @@ public class Business implements Serializable {
       this.image_url = image_url;
    }
 
+
+
+
    //---------------------------------------------------------------------------
    public class Coordinates implements Serializable {
       public final double latitude;

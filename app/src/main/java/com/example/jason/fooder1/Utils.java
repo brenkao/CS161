@@ -5,21 +5,29 @@ import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.os.Build;
+import android.os.StrictMode;
 import android.support.annotation.RequiresApi;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 
+import com.example.jason.fooder1.pojo.AccessToken;
+import com.example.jason.fooder1.pojo.Business;
+import com.example.jason.fooder1.pojo.SearchResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * Created by Jason on 3/14/2017.
@@ -29,44 +37,82 @@ public class Utils {
 
     private static final String TAG = "Utils";
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public static List<Profile> loadProfiles(Context context){
-        try{
-            GsonBuilder builder = new GsonBuilder();
-            Gson gson = builder.create();
+    private static final String CLIENT_ID = "uX4P1ceVg4_kfsi-miohDA"; // ENTER CLIENT_ID
+    private static final String CLIENT_SECRET = "4fOdvNkltK7LWrf4poQkEhBgUVGDJKk86oziaMIjgiiFsIyVmQlVaART0jhFtMDO"; // ENTER CLIENT_SECRET
+    private static final String SAMPLE_BUSINESS_ID = "anchor-oyster-bar-san-francisco";
+    private static final String SAMPLE_LOCATION = "San Jose, CA";
 
-            JSONArray array = new JSONArray(loadJSONFromAsset(context, "profiles.json"));
-            List<Profile> profileList = new ArrayList<>();
-            for(int i=0;i<array.length();i++){
-                Profile profile = gson.fromJson(array.getString(i), Profile.class);
-                profileList.add(profile);
+
+
+
+
+
+     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+     public static List<String> loadProfiles(){
+        try{
+
+
+
+
+
+            Gson gson = new Gson();
+            String business = gson.toJson(MainActivity.searchResponse);
+
+
+            JSONObject jsonObject = new JSONObject(business);
+            JSONArray getBusinesses = jsonObject.getJSONArray("businesses");
+
+            //System.out.println("--Business API--");
+            //System.out.println(gson.fromJson(getBusinesses.getString(0), SearchResponse.class));
+
+
+            List<String> businessList = new ArrayList<>();
+            for(int i=0;i<getBusinesses.length();i++){
+                String business1 = getBusinesses.getString(i).toString();
+                businessList.add(business1);
+
+            //Log.d("test", getBusinesses.toString());
+//            String businessString = jsonObject.getString("businesses");
+//            String nameString = getBusinesses.getJSONObject(0).getString("name");
+//            String imgString = getBusinesses.getJSONObject(0).getString("image_url");
+//            String priceString = getBusinesses.getJSONObject(0).getString("price");
+//            String getLocation = getBusinesses.getJSONObject(0).getString("location");
+//            JSONObject getAddress = new JSONObject(getLocation);
+//            String location = getAddress.getString("display_address");
+//            Log.d("test", location);
+////
+//            //JSONArray array = new JSONArray(loadJSONFromAsset(contex)));
+//            List<Profile> profileList = new ArrayList<>();
+//            //for(int i=0;i<array.length();i++){
+//              //  Profile profile = gson.fromJson(array.getString(i), Profile.class);
+//                //profileList.add(profile);
             }
 
-            return profileList;
+            return businessList;
         }catch (Exception e){
             e.printStackTrace();
             return null;
         }
     }
 
-    private static String loadJSONFromAsset(Context context, String jsonFileName) {
-        String json = null;
-        InputStream is=null;
-        try {
-            AssetManager manager = context.getAssets();
-            Log.d(TAG,"path "+jsonFileName);
-            is = manager.open(jsonFileName);
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        return json;
-    }
+//    private static String loadJSONFromAsset(Context context, String jsonFileName) {
+//        String json = null;
+//        InputStream is=null;
+//        try {
+//            AssetManager manager = context.getAssets();
+//            Log.d(TAG,"path "+jsonFileName);
+//            is = manager.open(jsonFileName);
+//            int size = is.available();
+//            byte[] buffer = new byte[size];
+//            is.read(buffer);
+//            is.close();
+//            json = new String(buffer, "UTF-8");
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//            return null;
+//        }
+//        return json;
+//    }
 
     public static Point getDisplaySize(WindowManager windowManager){
         try {

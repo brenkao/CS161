@@ -7,17 +7,23 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.example.jason.fooder1.pojo.AccessToken;
 import com.example.jason.fooder1.pojo.Business;
+import com.example.jason.fooder1.pojo.SearchResponse;
+import com.google.gson.Gson;
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 
+import org.json.JSONException;
+
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -33,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String CLIENT_ID = "uX4P1ceVg4_kfsi-miohDA"; // ENTER CLIENT_ID
     private static final String CLIENT_SECRET = "4fOdvNkltK7LWrf4poQkEhBgUVGDJKk86oziaMIjgiiFsIyVmQlVaART0jhFtMDO"; // ENTER CLIENT_SECRET
     private static final String SAMPLE_BUSINESS_ID = "anchor-oyster-bar-san-francisco";
-
+    private static final String SAMPLE_LOCATION = "San Jose, CA";
+    public static SearchResponse searchResponse;
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,20 +94,36 @@ public class MainActivity extends AppCompatActivity {
         final YelpV3APIProvider factory = new YelpV3APIProvider(CLIENT_ID, CLIENT_SECRET);
         final Business business;
         List<Business> businessList = new ArrayList<>();
+        List<SearchResponse> searchList = new ArrayList<>();
 
         try {
             final AccessToken accessToken = factory.getAccessToken().execute().body();
             final YelpV3API yelp = factory.getAPI(accessToken.access_token);
-            final Call<Business> businessCall = yelp.business(SAMPLE_BUSINESS_ID, null);
-            business = businessCall.execute().body();
-            //Log.d("test", business.location.display_address);
-            businessList.add(business);
+//            final Call<Business> businessCall = yelp.business(SAMPLE_BUSINESS_ID, null);
+//            business = businessCall.execute().body();
+            //businessList.add(business);
+            final HashMap<String, String> params = new HashMap<String, String>();
+            params.put("location", SAMPLE_LOCATION);
+            params.put("term", "restaurants");
+            final Call<SearchResponse> searchCall = yelp.search(params);
+            searchResponse = searchCall.execute().body();
 
+
+            //searchList.add(searchResponse);
+            Log.d("test", searchList.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for(Business bus: businessList){
-            mSwipeView.addView(new TinderCard(mContext, bus, mSwipeView));
+//        final Gson gson = new Gson();
+//        System.out.println("--Business API--");
+//        System.out.println(gson.toJson(searchResponse));
+
+        for(String bus: Utils.loadProfiles()){
+            try {
+                mSwipeView.addView(new TinderCard(mContext, bus, mSwipeView));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
         findViewById(R.id.rejectBtn).setOnClickListener(new View.OnClickListener() {
