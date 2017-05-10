@@ -5,8 +5,8 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.example.jason.fooder1.pojo.Business;
+import com.example.jason.fooder1.pojo.SearchResponse;
+import com.google.gson.Gson;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 import com.mindorks.placeholderview.annotations.Layout;
 import com.mindorks.placeholderview.annotations.Resolve;
@@ -16,6 +16,10 @@ import com.mindorks.placeholderview.annotations.swipe.SwipeIn;
 import com.mindorks.placeholderview.annotations.swipe.SwipeInState;
 import com.mindorks.placeholderview.annotations.swipe.SwipeOut;
 import com.mindorks.placeholderview.annotations.swipe.SwipeOutState;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by Jason on 3/14/2017.
@@ -33,20 +37,36 @@ public class TinderCard {
     @View(R.id.locationNameTxt)
     private TextView locationNameTxt;
 
-    private Business mBusiness;
+    private SearchResponse mBusiness;
     private Context mContext;
     private SwipePlaceHolderView mSwipeView;
 
-    public TinderCard(Context context, Business bus, SwipePlaceHolderView swipeView) {
+    public TinderCard(Context context, SearchResponse bus, SwipePlaceHolderView swipeView) {
         mContext = context;
         mBusiness = bus;
         mSwipeView = swipeView;
     }
 
     @Resolve
-    private void onResolved(){
-        Glide.with(mContext).load(mBusiness.image_url).into(profileImageView);
-        namePriceTxt.setText(mBusiness.name + ", " + mBusiness.price);
+    private void onResolved() throws JSONException{
+        Gson gson = new Gson();
+        String business = gson.toJson(mBusiness);
+
+        JSONObject jsonObject = new JSONObject(business);
+       // Log.d("test", jsonObject.toString());
+        JSONArray getBusinesses = jsonObject.getJSONArray("businesses");
+        //Log.d("test", getBusinesses.toString());
+ //       String businessString = jsonObject.getString("businesses");
+//        Log.d("test", businessString);
+        JSONObject getName = getBusinesses.getJSONObject(0).getJSONObject("name");
+        JSONObject getLocation = getBusinesses.getJSONObject(0).getJSONObject("location");
+        JSONObject address = getLocation.getJSONObject("address1");
+        Log.d("test", getName.toString());
+        String add = address.getString("address1");
+        String name = getName.getString("name");
+
+        // Glide.with(mContext).load(mBusiness.image_url).into(profileImageView);
+        namePriceTxt.setText(name + ", " + add);
       //  locationNameTxt.setText(mBusiness.location.display_address);
     }
 
@@ -62,6 +82,7 @@ public class TinderCard {
     }
 
     @SwipeIn
+
     private void onSwipeIn(){
         Log.d("EVENT", "onSwipedIn");
     }

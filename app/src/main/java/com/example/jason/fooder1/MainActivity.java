@@ -13,11 +13,13 @@ import android.widget.ImageView;
 
 import com.example.jason.fooder1.pojo.AccessToken;
 import com.example.jason.fooder1.pojo.Business;
+import com.example.jason.fooder1.pojo.SearchResponse;
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String CLIENT_ID = "uX4P1ceVg4_kfsi-miohDA"; // ENTER CLIENT_ID
     private static final String CLIENT_SECRET = "4fOdvNkltK7LWrf4poQkEhBgUVGDJKk86oziaMIjgiiFsIyVmQlVaART0jhFtMDO"; // ENTER CLIENT_SECRET
     private static final String SAMPLE_BUSINESS_ID = "anchor-oyster-bar-san-francisco";
+    private static final String SAMPLE_LOCATION = "San Jose, CA";
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -87,19 +90,25 @@ public class MainActivity extends AppCompatActivity {
         final YelpV3APIProvider factory = new YelpV3APIProvider(CLIENT_ID, CLIENT_SECRET);
         final Business business;
         List<Business> businessList = new ArrayList<>();
+        List<SearchResponse> searchList = new ArrayList<>();
 
         try {
             final AccessToken accessToken = factory.getAccessToken().execute().body();
             final YelpV3API yelp = factory.getAPI(accessToken.access_token);
-            final Call<Business> businessCall = yelp.business(SAMPLE_BUSINESS_ID, null);
-            business = businessCall.execute().body();
+//            final Call<Business> businessCall = yelp.business(SAMPLE_BUSINESS_ID, null);
+//            business = businessCall.execute().body();
+            //businessList.add(business);
+            final HashMap<String, String> params = new HashMap<String, String>();
+            params.put("location", SAMPLE_LOCATION);
+            final Call<SearchResponse> searchCall = yelp.search(params);
+            final SearchResponse searchResponse = searchCall.execute().body();
             //Log.d("test", business.location.display_address);
-            businessList.add(business);
+            searchList.add(searchResponse);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for(Business bus: businessList){
+        for(SearchResponse bus: searchList){
             mSwipeView.addView(new TinderCard(mContext, bus, mSwipeView));
         }
 
