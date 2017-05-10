@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.jason.fooder1.pojo.SearchResponse;
 import com.google.gson.Gson;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
@@ -56,18 +57,19 @@ public class TinderCard {
        // Log.d("test", jsonObject.toString());
         JSONArray getBusinesses = jsonObject.getJSONArray("businesses");
         //Log.d("test", getBusinesses.toString());
- //       String businessString = jsonObject.getString("businesses");
-//        Log.d("test", businessString);
-        JSONObject getName = getBusinesses.getJSONObject(0).getJSONObject("name");
-        JSONObject getLocation = getBusinesses.getJSONObject(0).getJSONObject("location");
-        JSONObject address = getLocation.getJSONObject("address1");
-        Log.d("test", getName.toString());
-        String add = address.getString("address1");
-        String name = getName.getString("name");
+        String businessString = jsonObject.getString("businesses");
+        String nameString = getBusinesses.getJSONObject(0).getString("name");
+        String imgString = getBusinesses.getJSONObject(0).getString("image_url");
+        String priceString = getBusinesses.getJSONObject(0).getString("price");
+        String getLocation = getBusinesses.getJSONObject(0).getString("location");
+        JSONObject getAddress = new JSONObject(getLocation);
+        String location = getAddress.getString("display_address");
+        Log.d("test", location);
+        //String address = getLocation.getJSONObject(0).getString("display_address");
 
-        // Glide.with(mContext).load(mBusiness.image_url).into(profileImageView);
-        namePriceTxt.setText(name + ", " + add);
-      //  locationNameTxt.setText(mBusiness.location.display_address);
+        Glide.with(mContext).load(imgString).into(profileImageView);
+        namePriceTxt.setText(nameString + ", " + priceString);
+        locationNameTxt.setText(location);
     }
 
     @SwipeOut
