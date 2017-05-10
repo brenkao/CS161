@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -41,7 +40,6 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     private static final int RC_SIGN_IN = 9001;
 
     private LinearLayout Prof_Section;
-    private Button SignOut;
     private SignInButton SignIn;
     public static TextView Name, Email;
     private ImageView Prof_Pic;
@@ -60,16 +58,13 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_screen);
-        setContentView(R.layout.login_screen);
 
         Prof_Section = (LinearLayout)findViewById(R.id.prof_section);
         SignIn = (SignInButton)findViewById(R.id.bn_login);
-        SignOut = (Button)findViewById(R.id.bn_logout);
         Name = (TextView)findViewById(R.id.name);
         Email = (TextView)findViewById(R.id.email);
         Prof_Pic = (ImageView)findViewById(R.id.prof_pic);
         SignIn.setOnClickListener(this);
-        SignOut.setOnClickListener(this);
         Prof_Section.setVisibility(View.GONE);
         // Views
         //mStatusTextView = (TextView) findViewById(R.id.status);
@@ -85,7 +80,6 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         };
         // Button listeners
         findViewById(R.id.bn_login).setOnClickListener(this);
-        findViewById(R.id.bn_logout).setOnClickListener(this);
         //findViewById(R.id.disconnect_button).setOnClickListener(this);
 
         // [START config_signin]

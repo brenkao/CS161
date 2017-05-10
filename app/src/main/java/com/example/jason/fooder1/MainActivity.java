@@ -28,6 +28,7 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -66,14 +67,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-
-        Bundle info = getIntent().getExtras();
-        if(info != null) {
-            myName = info.getString("myName");
-            myEmail = info.getString("myEmail");
-        }
-
-        getSupportActionBar().setTitle("Welcome!! " + myName);
         //getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.drawable.ic_icon);
@@ -93,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         mSwipeView = (SwipePlaceHolderView)findViewById(R.id.swipeView);
         mContext = getApplicationContext();
         userName = (TextView) findViewById(R.id.u_name);
-        test = temp + "";
+        test = temp = "";
         bucketList_text = (TextView) findViewById(R.id.bList_text);
 
         logOutButton = (Button) findViewById(R.id.bn_logout);
@@ -142,19 +135,23 @@ public class MainActivity extends AppCompatActivity {
             Call<SearchResponse> searchCall = yelp.search(params);
             searchResponse = searchCall.execute().body();
 
-
+            List<String> bus = Utils.loadProfiles();
+            Collections.shuffle(bus);
             //searchList.add(searchResponse);
             Log.d("test", searchList.toString());
 //        final Gson gson = new Gson();
 //        System.out.println("--Business API--");
 //        System.out.println(gson.toJson(searchResponse));
-                for (String bus : Utils.loadProfiles()) {
-                    try {
-                        mSwipeView.addView(new TinderCard(mContext, bus, mSwipeView));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+            for (int i = 0; i < bus.size();i++) {
+                try {
+                    TinderCard tc = new TinderCard(mContext, bus.get(i), mSwipeView);
+                    myList.add(tc.getName());
+                    mSwipeView.addView(tc);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

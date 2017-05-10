@@ -65,6 +65,10 @@ public class TinderCard {
         locationNameTxt.setText(getAddress.getString("display_address"));
 
     }
+    public String getName() throws JSONException
+    {
+        return mBusiness2.getString("name");
+    }
 
     @SwipeIn
     private void onSwipeIn() {
@@ -93,5 +97,9 @@ public class TinderCard {
     }
     public static double getLatitude() throws JSONException{
         return getCoord.getDouble("latitude");
+    }
+    public String getID() throws JSONException
+    {
+        return mBusiness2.getString("id");
     }
 }
