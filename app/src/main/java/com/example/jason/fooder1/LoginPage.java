@@ -49,6 +49,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
     // [START declare_auth]
     private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
     // [END declare_auth]
 
     private GoogleApiClient mGoogleApiClient;
@@ -74,6 +75,14 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         //mStatusTextView = (TextView) findViewById(R.id.status);
         //mDetailTextView = (TextView) findViewById(R.id.detail);
 
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if(firebaseAuth.getCurrentUser() != null) {
+                    startActivity(new Intent(LoginPage.this, MainActivity.class));
+                }
+            }
+        };
         // Button listeners
         findViewById(R.id.bn_login).setOnClickListener(this);
         findViewById(R.id.bn_logout).setOnClickListener(this);
@@ -102,6 +111,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
+        mAuth.addAuthStateListener(mAuthListener);
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
     }
@@ -167,7 +177,6 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
-        Toast.makeText(this, "Logged In", Toast.LENGTH_SHORT).show();
 
     }
     // [END signin]
