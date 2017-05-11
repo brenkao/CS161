@@ -4,12 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
 import android.net.Uri;
+import android.nfc.Tag;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +22,11 @@ import android.widget.Toast;
 import com.example.jason.fooder1.pojo.AccessToken;
 import com.example.jason.fooder1.pojo.SearchResponse;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 
@@ -49,11 +56,18 @@ public class MainActivity extends AppCompatActivity {
     private Button bucketList_btn;
     private TextView bucketList_text;
     private ArrayList myList = new ArrayList();
+    private ArrayList existingFavorites = new ArrayList();
     private ArrayList<String> addressList = new ArrayList();
     private int counter = 0;
+    private String TAG = "myDebug";
+    private String myUID;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseDatabase database;
+    private DatabaseReference mDatabase;
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -61,8 +75,43 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         myName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        mDatabase.child("users").addValueEventListener(new ValueEventListener() {
+
+            // Invokes anytime data on database changes, as well as oncreate for initial snapshot
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // get all children defined in above child
+
+                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+
+
+                for(DataSnapshot child : children) {
+                    if(child.getKey().equals(myUID)) {
+                        //Log.d(TAG, "Found: " + myUID);
+                        //Log.d(TAG, child.getValue().toString());
+                        Iterable<DataSnapshot> asdf = child.getChildren();
+
+                        for(DataSnapshot qwer : asdf) {
+                            existingFavorites.add(qwer.getValue().toString());
+
+                            Log.d(TAG, qwer.getValue().toString());
+                        }
+                    }
+                }
+
+                checkFavorites();
+            }
+
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         getSupportActionBar().setTitle("Welcome " + myName);
         //getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -83,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
         mSwipeView = (SwipePlaceHolderView)findViewById(R.id.swipeView);
         mContext = getApplicationContext();
         bucketList_text = (TextView) findViewById(R.id.bList_text);
-
+        myUID = mAuth.getCurrentUser().getUid();
 
 
         int bottomMargin = Utils.dpToPx(160);
@@ -144,10 +193,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mSwipeView.doSwipe(true);
-
-                test+= "\n";
-                test += myList.get(counter).toString() + "\n";
+                test = myList.get(counter).toString();
                 update();
+                writeDatabase(myUID, test);
                 counter++;
             }
         });
@@ -163,13 +211,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Settings.class);
-                //intent.setClass(android.content.Intent.ACTION_VIEW, Settings.class);
+                //intent.setClass(android.content.Intent.ACTION_VIEW, Settings.claWss);
                startActivity(intent);
             }
         });
-
-
     }
+
+    private void writeDatabase(String userId, String newFav) {
+        //Log.d(TAG, newFav);
+        mDatabase.child("users").child(userId).child("Favorites").setValue(myList);
+    }
+
+    private void checkFavorites() {
+        for(int i = 0; i < existingFavorites.size(); i++) {
+            Log.d(TAG, "Fav(" + i + "): " + existingFavorites.get(i).toString());
+        }
+    }
+
     public void update()
     {
         bucketList_text.setText(test);
