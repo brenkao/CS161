@@ -54,21 +54,6 @@ public class Utils {
                 String business1 = getBusinesses.getString(i).toString();
                 businessList.add(business1);
 
-                //Log.d("test", getBusinesses.toString());
-//            String businessString = jsonObject.getString("businesses");
-//            String nameString = getBusinesses.getJSONObject(0).getString("name");
-//            String imgString = getBusinesses.getJSONObject(0).getString("image_url");
-//            String priceString = getBusinesses.getJSONObject(0).getString("price");
-//            String getLocation = getBusinesses.getJSONObject(0).getString("location");
-//            JSONObject getAddress = new JSONObject(getLocation);
-//            String location = getAddress.getString("display_address");
-//            Log.d("test", location);
-////
-//            //JSONArray array = new JSONArray(loadJSONFromAsset(contex)));
-//            List<Profile> profileList = new ArrayList<>();
-//            //for(int i=0;i<array.length();i++){
-//              //  Profile profile = gson.fromJson(array.getString(i), Profile.class);
-//                //profileList.add(profile);
             }
 
             return businessList;
