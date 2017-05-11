@@ -2,13 +2,18 @@ package com.example.jason.fooder1;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Point;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
@@ -43,14 +48,16 @@ public class MainActivity extends AppCompatActivity {
     private String test = "";
     private static final String CLIENT_ID = "uX4P1ceVg4_kfsi-miohDA"; // ENTER CLIENT_ID
     private static final String CLIENT_SECRET = "4fOdvNkltK7LWrf4poQkEhBgUVGDJKk86oziaMIjgiiFsIyVmQlVaART0jhFtMDO"; // ENTER CLIENT_SECRET
-    private static final String SAMPLE_BUSINESS_ID = "anchor-oyster-bar-san-francisco";
-    private static final String SAMPLE_LOCATION = "San Jose, CA";
     public static SearchResponse searchResponse;
     private Button bucketList_btn;
     private TextView bucketList_text;
     private ArrayList myList = new ArrayList();
     private ArrayList<String> addressList = new ArrayList();
     private int counter = 0;
+    private double longitude = 1;
+    private double latitude = 1;
+    private Location location;
+    private static final int MY_PERMISSIONS_ACCESS_FINE_LOCATION = 2;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -99,6 +106,25 @@ public class MainActivity extends AppCompatActivity {
                         .setSwipeInMsgLayoutId(R.layout.tinder_swipe_in_msg_view)
                         .setSwipeOutMsgLayoutId(R.layout.tinder_swipe_out_msg_view));
 
+        if (ContextCompat.checkSelfPermission(this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    android.Manifest.permission.ACCESS_FINE_LOCATION)) {
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_ACCESS_FINE_LOCATION);
+            }
+        }
+        else {
+            LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
+            location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+
+        }
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
@@ -112,8 +138,11 @@ public class MainActivity extends AppCompatActivity {
         try {
             final AccessToken accessToken = factory.getAccessToken().execute().body();
             final YelpV3API yelp = factory.getAPI(accessToken.access_token);
-            params.put("location", SAMPLE_LOCATION);
+            //params.put("location", SAMPLE_LOCATION);
+            params.put("latitude", String.valueOf(latitude));
+            params.put("longitude", String.valueOf(longitude));
             params.put("term", "restaurants");
+            params.put("radius_filter", "8000");
             Call<SearchResponse> searchCall = yelp.search(params);
             searchResponse = searchCall.execute().body();
             List<String> bus = Utils.loadProfiles();
@@ -186,5 +215,26 @@ public class MainActivity extends AppCompatActivity {
                 Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, BucketList.class);
         startActivity(intent);
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_ACCESS_FINE_LOCATION: {
+
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
     }
 }
