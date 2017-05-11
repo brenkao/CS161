@@ -2,6 +2,7 @@ package com.example.jason.fooder1;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.RadioButton;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Button;
 
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * Created by alexandriale on 5/9/17.
@@ -39,12 +41,26 @@ public class Settings extends AppCompatActivity{
 
     Button signout;
 
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
+
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
+                if(firebaseAuth.getCurrentUser() == null) {
+                    startActivity(new Intent(Settings.this, LoginPage.class));
+                }
+            }
+        };
 
         ratings = (TextView)findViewById(R.id.rating);
         distance = (TextView) findViewById(R.id.distance);
@@ -87,9 +103,7 @@ public class Settings extends AppCompatActivity{
         signout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Settings.this, LoginPage.class);
-                //intent.setClass(android.content.Intent.ACTION_VIEW, Settings.class);
-                startActivity(intent);
+                mAuth.signOut();
                 }
 
             });

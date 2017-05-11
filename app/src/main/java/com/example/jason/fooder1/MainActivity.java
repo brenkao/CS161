@@ -54,8 +54,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView bucketList_text;
     private ArrayList myList = new ArrayList();
     private int counter = 0;
-    private Button logOutButton;
-    private TextView userName;
     private String coord;
 
     private FirebaseAuth mAuth;
@@ -68,6 +66,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+        myName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+
+        getSupportActionBar().setTitle("Welcome " + myName);
         //getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.drawable.ic_icon);
@@ -85,20 +86,19 @@ public class MainActivity extends AppCompatActivity {
 
         mSwipeView = (SwipePlaceHolderView)findViewById(R.id.swipeView);
         mContext = getApplicationContext();
-        userName = (TextView) findViewById(R.id.u_name);
         test = temp = "";
         bucketList_text = (TextView) findViewById(R.id.bList_text);
 
-        logOutButton = (Button) findViewById(R.id.bn_logout);
-        logOutButton.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View view) {
-                mAuth.signOut();
-            }
-        });
+//        logOutButton = (Button) findViewById(R.id.bn_logout);
+//        logOutButton.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View view) {
+//                mAuth.signOut();
+//            }
+//        });
 
-        userName.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
 
         int bottomMargin = Utils.dpToPx(160);
         Point windowSize = Utils.getDisplaySize(getWindowManager());
