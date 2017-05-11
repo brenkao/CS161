@@ -191,10 +191,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Settings.class);
                 //intent.setClass(android.content.Intent.ACTION_VIEW, Settings.class);
-                startActivity(intent);
+                startActivity(intent);
 
-            }
-        });
+            }
+        });
 
 
     }
