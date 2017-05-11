@@ -39,8 +39,8 @@ public class TinderCard {
     private Context mContext;
     private SwipePlaceHolderView mSwipeView;
     private String business;
-    private static JSONObject mBusiness2;
-    private JSONObject getAddress;
+    private JSONObject mBusiness2;
+    private static JSONObject getAddress;
     private static JSONObject getCoord;
 
     public TinderCard(Context context, String bus, SwipePlaceHolderView swipeView) throws JSONException {
@@ -62,7 +62,7 @@ public class TinderCard {
 
         Glide.with(mContext).load(mBusiness2.getString("image_url")).into(profileImageView);
         namePriceTxt.setText(mBusiness2.getString("name") + ", " + mBusiness2.getString("price"));
-        locationNameTxt.setText(getAddress.getString("display_address"));
+        locationNameTxt.setText(getAddress.getString("display_address").replace("[","").replace("]","").replace("\"",""));
 
     }
     public String getName() throws JSONException
@@ -92,10 +92,8 @@ public class TinderCard {
         Log.d("EVENT", "onSwipeOutState");
     }
 
-    public static double getLongitude() throws JSONException{
-        return getCoord.getDouble("longitude");
+    public String getAddress() throws JSONException{
+        return getAddress.getString("display_address");
     }
-    public static double getLatitude() throws JSONException{
-        return getCoord.getDouble("latitude");
-    }
+
 }

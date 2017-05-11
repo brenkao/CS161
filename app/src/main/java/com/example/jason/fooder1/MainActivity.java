@@ -10,7 +10,6 @@ import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jason.fooder1.pojo.AccessToken;
-import com.example.jason.fooder1.pojo.Business;
 import com.example.jason.fooder1.pojo.SearchResponse;
 import com.google.firebase.auth.FirebaseAuth;
 import com.mindorks.placeholderview.SwipeDecor;
@@ -29,7 +27,6 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -43,8 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private String myName;
     private String myEmail;
     private String list;
-    private String test;
-    private String temp;
+    private String test = "";
     private static final String CLIENT_ID = "uX4P1ceVg4_kfsi-miohDA"; // ENTER CLIENT_ID
     private static final String CLIENT_SECRET = "4fOdvNkltK7LWrf4poQkEhBgUVGDJKk86oziaMIjgiiFsIyVmQlVaART0jhFtMDO"; // ENTER CLIENT_SECRET
     private static final String SAMPLE_BUSINESS_ID = "anchor-oyster-bar-san-francisco";
@@ -53,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
     private Button bucketList_btn;
     private TextView bucketList_text;
     private ArrayList myList = new ArrayList();
+    private ArrayList<String> addressList = new ArrayList();
     private int counter = 0;
-    private String coord;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -86,18 +82,8 @@ public class MainActivity extends AppCompatActivity {
 
         mSwipeView = (SwipePlaceHolderView)findViewById(R.id.swipeView);
         mContext = getApplicationContext();
-        test = temp = "";
         bucketList_text = (TextView) findViewById(R.id.bList_text);
 
-
-//        logOutButton = (Button) findViewById(R.id.bn_logout);
-//        logOutButton.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View view) {
-//                mAuth.signOut();
-//            }
-//        });
 
 
         int bottomMargin = Utils.dpToPx(160);
@@ -121,9 +107,6 @@ public class MainActivity extends AppCompatActivity {
         assert (CLIENT_ID != null && CLIENT_SECRET != null);
 
         final YelpV3APIProvider factory = new YelpV3APIProvider(CLIENT_ID, CLIENT_SECRET);
-        final Business business;
-        List<Business> businessList = new ArrayList<>();
-        List<SearchResponse> searchList = new ArrayList<>();
 
         final HashMap<String, String> params = new HashMap<String, String>();
         try {
@@ -131,22 +114,13 @@ public class MainActivity extends AppCompatActivity {
             final YelpV3API yelp = factory.getAPI(accessToken.access_token);
             params.put("location", SAMPLE_LOCATION);
             params.put("term", "restaurants");
-            params.put("limit", "5");
             Call<SearchResponse> searchCall = yelp.search(params);
             searchResponse = searchCall.execute().body();
-//            final Call<Business> businessCall = yelp.business(TinderCard.getID(), null);
-//            business = businessCall.execute().body();
             List<String> bus = Utils.loadProfiles();
-            Collections.shuffle(bus);
-            //searchList.add(searchResponse);
-//        final Gson gson = new Gson();
-//        System.out.println("--Business API--");
-//        System.out.println(gson.toJson(searchResponse));
-//            Log.d("test", String.valueOf(business.coordinates));
             for (int i = 0; i < bus.size();i++) {
                 try {
                     TinderCard tc = new TinderCard(mContext, bus.get(i), mSwipeView);
-                    Log.d("test", tc.getName());
+                    addressList.add(tc.getAddress());
                     myList.add(tc.getName());
                     mSwipeView.addView(tc);
 
@@ -171,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mSwipeView.doSwipe(true);
 
-                test+= temp + "\n";
+                test+= "\n";
                 test += myList.get(counter).toString() + "\n";
                 update();
                 counter++;
@@ -180,8 +154,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.mapBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String uri = "http://maps.google.com/";
-                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=" + addressList.get(counter).replace("[","").replace("]","").replace("\"","")));
                 intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
                 startActivity(intent);
             }
