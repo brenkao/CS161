@@ -39,7 +39,7 @@ public class TinderCard {
     private Context mContext;
     private SwipePlaceHolderView mSwipeView;
     private String business;
-    private JSONObject mBusiness2;
+    private static JSONObject mBusiness2;
     private JSONObject getAddress;
     private static JSONObject getCoord;
 
@@ -97,9 +97,5 @@ public class TinderCard {
     }
     public static double getLatitude() throws JSONException{
         return getCoord.getDouble("latitude");
-    }
-    public String getID() throws JSONException
-    {
-        return mBusiness2.getString("id");
     }
 }

@@ -3,6 +3,7 @@ package com.example.jason.fooder1;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -55,10 +56,10 @@ public class MainActivity extends AppCompatActivity {
     private int counter = 0;
     private Button logOutButton;
     private TextView userName;
+    private String coord;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -82,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-
         mSwipeView = (SwipePlaceHolderView)findViewById(R.id.swipeView);
         mContext = getApplicationContext();
         userName = (TextView) findViewById(R.id.u_name);
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        userName.setText(mAuth.getCurrentUser().getDisplayName());
+        userName.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
 
         int bottomMargin = Utils.dpToPx(160);
         Point windowSize = Utils.getDisplaySize(getWindowManager());
@@ -134,17 +134,19 @@ public class MainActivity extends AppCompatActivity {
             params.put("limit", "5");
             Call<SearchResponse> searchCall = yelp.search(params);
             searchResponse = searchCall.execute().body();
-
+//            final Call<Business> businessCall = yelp.business(TinderCard.getID(), null);
+//            business = businessCall.execute().body();
             List<String> bus = Utils.loadProfiles();
             Collections.shuffle(bus);
             //searchList.add(searchResponse);
-            Log.d("test", searchList.toString());
 //        final Gson gson = new Gson();
 //        System.out.println("--Business API--");
 //        System.out.println(gson.toJson(searchResponse));
+//            Log.d("test", String.valueOf(business.coordinates));
             for (int i = 0; i < bus.size();i++) {
                 try {
                     TinderCard tc = new TinderCard(mContext, bus.get(i), mSwipeView);
+                    Log.d("test", tc.getName());
                     myList.add(tc.getName());
                     mSwipeView.addView(tc);
 
@@ -170,11 +172,30 @@ public class MainActivity extends AppCompatActivity {
                 mSwipeView.doSwipe(true);
 
                 test+= temp + "\n";
-                counter++;
                 test += myList.get(counter).toString() + "\n";
                 update();
+                counter++;
             }
         });
+        findViewById(R.id.mapBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String uri = "http://maps.google.com/";
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
+                intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+                startActivity(intent);
+            }
+        });
+        findViewById(R.id.prof_pic2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Settings.class);
+                //intent.setClass(android.content.Intent.ACTION_VIEW, Settings.class);
+                startActivity(intent);
+
+            }
+        });
+
 
     }
     public void update()
