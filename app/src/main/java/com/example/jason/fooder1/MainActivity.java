@@ -15,6 +15,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.mindorks.placeholderview.SwipeDecor;
@@ -43,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-
+    private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Get current user's display name
+        //userName.setText(mAuth.getCurrentUser().getDisplayName());
         userName.setText(mAuth.getCurrentUser().getDisplayName());
 
         //Prof_Pic2.setImageDrawable(mAuth.getCurrentUser().getPhotoUrl());

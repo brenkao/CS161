@@ -43,48 +43,42 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
     private LinearLayout Prof_Section;
     private SignInButton SignIn;
-    public static TextView Name, Email;
     private ImageView Prof_Pic;
     private GoogleApiClient googleApiClient;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private GoogleApiClient mGoogleApiClient;
-    private TextView mStatusTextView;
-    private TextView mDetailTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_screen);
-        setContentView(R.layout.login_screen);
 
         Prof_Section = (LinearLayout)findViewById(R.id.prof_section);
         SignIn = (SignInButton)findViewById(R.id.bn_login);
+
+        SignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signIn();
+            }
+        });
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(firebaseAuth.getCurrentUser() != null) {
+                    Toast.makeText(LoginPage.this, "logged in", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(LoginPage.this, MainActivity.class));
                 }
+                else
+                    Toast.makeText(LoginPage.this, "logged out", Toast.LENGTH_SHORT).show();
             }
         };
 
-        Name = (TextView)findViewById(R.id.name);
-        Email = (TextView)findViewById(R.id.email);
         Prof_Pic = (ImageView)findViewById(R.id.prof_pic);
-        SignIn.setOnClickListener(this);
-
         Prof_Section.setVisibility(View.GONE);
-
-        // Views
-        //mStatusTextView = (TextView) findViewById(R.id.status);
-        //mDetailTextView = (TextView) findViewById(R.id.detail);
-
-        // Button listeners
-        findViewById(R.id.bn_login).setOnClickListener(this);
-        findViewById(R.id.bn_logout).setOnClickListener(this);
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -106,7 +100,6 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         // Check if user is signed in (non-null) and update UI accordingly.
         mAuth.addAuthStateListener(mAuthListener);
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
     }
 
     @Override
@@ -120,12 +113,9 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
-                handleResult(result);
             } else {
                 // Google Sign In failed, update UI appropriately
-                // [START_EXCLUDE]
-                updateUI(null);
-                // [END_EXCLUDE]
+                // ...
             }
         }
     }
@@ -145,18 +135,12 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             Toast.makeText(LoginPage.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            updateUI(null);
                         }
-
-                        // [START_EXCLUDE]
-                        //hideProgressDialog();
-                        // [END_EXCLUDE]
                     }
                 });
     }
@@ -164,51 +148,6 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
-
-    private void signOut() {
-        // Firebase sign out
-        mAuth.signOut();
-
-        // Google sign out
-        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
-                new ResultCallback<Status>() {
-                    @Override
-                    public void onResult(@NonNull Status status) {
-                        updateUI(null);
-                    }
-                });
-    }
-
-    private void revokeAccess() {
-        // Firebase sign out
-        mAuth.signOut();
-
-        // Google revoke access
-        Auth.GoogleSignInApi.revokeAccess(mGoogleApiClient).setResultCallback(
-                new ResultCallback<Status>() {
-                    @Override
-                    public void onResult(@NonNull Status status) {
-                        updateUI(null);
-                    }
-                });
-    }
-
-    public void updateUI(FirebaseUser user) {
-        //hideProgressDialog();
-        if (user != null) {
-            //mStatusTextView.setText(getString(R.string.google_status_fmt, user.getEmail()));
-            //mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
-
-            //findViewById(R.id.bn_login).setVisibility(View.GONE);
-            //findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
-        } else {
-            //mStatusTextView.setText(R.string.signed_out);
-            //mDetailTextView.setText(null);
-
-            //findViewById(R.id.bn_login).setVisibility(View.VISIBLE);
-            //findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
-        }
     }
 
     @Override
@@ -219,20 +158,15 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     }
 
     private void handleResult(GoogleSignInResult result) {
-
-        String name = null;
-        String email = null;
+        Toast.makeText(this, "handle me daddy", Toast.LENGTH_SHORT).show();
 
         if(result.isSuccess()) {
             GoogleSignInAccount account = result.getSignInAccount();
-            name = account.getDisplayName();
-            email = account.getEmail();
+
             if (account.getPhotoUrl() != null) {
                 String img_url = account.getPhotoUrl().toString();
                 Glide.with(this).load(img_url).into(Prof_Pic);
             }
-            Name.setText(name);
-            Email.setText(email);
 
             //updateUI(true);
 
@@ -240,8 +174,9 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
             //updateUI(false);
         }
 
+        /**
         Intent intent = new Intent(LoginPage.this, MainActivity.class);
-        startActivity(intent);
+        startActivity(intent);**/
     }
 
     @Override
