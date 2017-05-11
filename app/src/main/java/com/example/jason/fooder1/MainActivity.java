@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
@@ -15,6 +16,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -58,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     private double latitude = 1;
     private Location location;
     private static final int MY_PERMISSIONS_ACCESS_FINE_LOCATION = 2;
-
+    private LocationManager lm;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
@@ -119,12 +121,16 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         else {
-            LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
+            lm = (LocationManager) getSystemService(LOCATION_SERVICE);
             location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             latitude = location.getLatitude();
             longitude = location.getLongitude();
 
+            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0 , ll);
+            lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0 , ll);
+
         }
+        Log.d("test", String.valueOf(longitude));
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
@@ -217,8 +223,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_ACCESS_FINE_LOCATION: {
 
@@ -237,4 +242,27 @@ public class MainActivity extends AppCompatActivity {
             // permissions this app might request
         }
     }
+    private final LocationListener ll = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+            Log.d("test", String.valueOf(latitude));
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+    };
 }
