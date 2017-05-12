@@ -42,6 +42,8 @@ public class TinderCard {
     private JSONObject mBusiness2;
     private JSONObject getAddress;
     private JSONObject getCoord;
+    private double distance;
+    private final double milesConvert = 0.000621371;
 
     public TinderCard(Context context, String bus, SwipePlaceHolderView swipeView) throws JSONException {
         mContext = context;
@@ -54,6 +56,10 @@ public class TinderCard {
         String getCoordinates = mBusiness2.getString("coordinates");
         getCoord = new JSONObject((getCoordinates));
 
+        distance = Double.parseDouble(mBusiness2.getString("distance"));
+        distance = distance * milesConvert;
+
+
     }
 
     @Resolve
@@ -61,8 +67,9 @@ public class TinderCard {
 
 
         Glide.with(mContext).load(mBusiness2.getString("image_url")).into(profileImageView);
-        namePriceTxt.setText(mBusiness2.getString("name") + ", " + mBusiness2.getString("price"));
+        namePriceTxt.setText(mBusiness2.getString("name") + ", " + mBusiness2.getString("price") + ", " + String.format("%.2f", distance) + " miles");
         locationNameTxt.setText(getAddress.getString("display_address").replace("[","").replace("]","").replace("\"",""));
+
 
     }
     public String getName() throws JSONException
