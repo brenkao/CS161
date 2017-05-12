@@ -40,8 +40,8 @@ public class TinderCard {
     private SwipePlaceHolderView mSwipeView;
     private String business;
     private JSONObject mBusiness2;
-    private static JSONObject getAddress;
-    private static JSONObject getCoord;
+    private JSONObject getAddress;
+    private JSONObject getCoord;
 
     public TinderCard(Context context, String bus, SwipePlaceHolderView swipeView) throws JSONException {
         mContext = context;

@@ -24,22 +24,22 @@ public class Settings extends AppCompatActivity{
     private GoogleApiClient googleApiClient;
 
     private TextView ratings;
-    TextView distance;
-    TextView price;
-    TextView settings;
-    TextView miles;
+    private TextView distance;
+    private TextView price;
+    private TextView settings;
+    private TextView miles;
 
-    RatingBar ratingBar;
-    SeekBar seekBar;
-    double progress = 10.0;
+    private RatingBar ratingBar;
+    private SeekBar seekBar;
+    private double progress;
 
-    RadioButton radio1;
-    RadioButton radio2;
-    RadioButton radio3;
-    RadioButton radio4;
-    RadioButton radio5;
+    private RadioButton radio1;
+    private RadioButton radio2;
+    private RadioButton radio3;
+    private RadioButton radio4;
+    private RadioButton radio5;
 
-    Button signout;
+    private Button signout;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -70,6 +70,8 @@ public class Settings extends AppCompatActivity{
 
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         seekBar = (SeekBar) findViewById(R.id.seekBar);
+        progress = seekBar.getProgress();
+        miles.setText(progress + "miles");
 
         radio1 = (RadioButton) findViewById(R.id.radio1);
         radio2 = (RadioButton) findViewById(R.id.radio2);

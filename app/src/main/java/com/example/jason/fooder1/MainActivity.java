@@ -247,7 +247,6 @@ public class MainActivity extends AppCompatActivity {
         public void onLocationChanged(Location location) {
             latitude = location.getLatitude();
             longitude = location.getLongitude();
-            Log.d("test", String.valueOf(latitude));
         }
 
         @Override
