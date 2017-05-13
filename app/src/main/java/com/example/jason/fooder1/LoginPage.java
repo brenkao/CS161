@@ -69,7 +69,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(firebaseAuth.getCurrentUser() != null) {
                     Toast.makeText(LoginPage.this, "Logged in", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(LoginPage.this, MainActivity.class));
+                    startActivity(new Intent(LoginPage.this, Settings.class));
                 } else
                     Toast.makeText(LoginPage.this, "Logged Out", Toast.LENGTH_SHORT).show();
             }
