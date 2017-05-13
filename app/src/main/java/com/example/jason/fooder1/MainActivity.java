@@ -218,12 +218,15 @@ public class MainActivity extends AppCompatActivity {
             params.put("latitude", String.valueOf(latitude));
             params.put("longitude", String.valueOf(longitude));
             params.put("term", "restaurants");
-            params.put("radius_filter", "8000");
+            int radius = getIntent().getExtras().getInt("seekBar");
+            radius = (int) (radius * 1609.34);
+            params.put("radius", String.valueOf(radius));
             String price = "";
             boolean price1 = getIntent().getExtras().getBoolean("price1");
             boolean price2 = getIntent().getExtras().getBoolean("price2");
             boolean price3 = getIntent().getExtras().getBoolean("price3");
             boolean price4 = getIntent().getExtras().getBoolean("price4");
+
             if(price1) {
                 price += "1,";
             }

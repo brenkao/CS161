@@ -32,7 +32,7 @@ public class Settings extends AppCompatActivity{
 
     private RatingBar ratingBar;
     private SeekBar seekBar;
-    private double progress;
+    private int progress;
 
     public CheckBox check1;
     public CheckBox check2;
@@ -120,6 +120,7 @@ public class Settings extends AppCompatActivity{
         intent.putExtra("price2", price2);
         intent.putExtra("price3", price3);
         intent.putExtra("price4", price4);
+        intent.putExtra("seekBar", progress);
 
         check1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
