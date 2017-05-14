@@ -11,7 +11,10 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Button;
 
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.FirebaseAuth;
 
 /**
@@ -43,7 +46,7 @@ public class Settings extends AppCompatActivity{
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-
+    private GoogleApiClient mGoogleApiClient;
 
 
     @Override
@@ -56,13 +59,13 @@ public class Settings extends AppCompatActivity{
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
-                if(firebaseAuth.getCurrentUser() == null) {
+                if (firebaseAuth.getCurrentUser() == null) {
                     startActivity(new Intent(Settings.this, LoginPage.class));
                 }
             }
         };
 
-        ratings = (TextView)findViewById(R.id.rating);
+        ratings = (TextView) findViewById(R.id.rating);
         distance = (TextView) findViewById(R.id.distance);
         price = (TextView) findViewById(R.id.price);
         settings = (TextView) findViewById(R.id.settings);
@@ -81,13 +84,12 @@ public class Settings extends AppCompatActivity{
 
         signout = (Button) findViewById(com.example.jason.fooder1.R.id.signout);
 
-
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 progress = i;
                 miles.setText(progress + " miles");
-               //distance.setText( progress + "miles");
+                //distance.setText( progress + "miles");
 
             }
 
@@ -106,10 +108,9 @@ public class Settings extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 mAuth.signOut();
-                }
-
-            });
-        }
+            }
+        });
+    }
 }
 
 

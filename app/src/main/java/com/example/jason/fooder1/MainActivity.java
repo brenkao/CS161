@@ -27,6 +27,11 @@ import android.widget.Toast;
 import com.example.jason.fooder1.pojo.AccessToken;
 import com.example.jason.fooder1.pojo.SearchResponse;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 
@@ -34,6 +39,7 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -47,11 +53,9 @@ public class MainActivity extends AppCompatActivity {
     private String myName;
     private String myEmail;
     private String list;
-    private String test = "";
     private static final String CLIENT_ID = "uX4P1ceVg4_kfsi-miohDA"; // ENTER CLIENT_ID
     private static final String CLIENT_SECRET = "4fOdvNkltK7LWrf4poQkEhBgUVGDJKk86oziaMIjgiiFsIyVmQlVaART0jhFtMDO"; // ENTER CLIENT_SECRET
     public static SearchResponse searchResponse;
-    private Button bucketList_btn;
     private TextView bucketList_text;
     private ArrayList myList = new ArrayList();
     private ArrayList<String> addressList = new ArrayList();
@@ -63,6 +67,12 @@ public class MainActivity extends AppCompatActivity {
     private LocationManager lm;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private DatabaseReference mDatabase;
+
+    private List<String> tempList = new ArrayList<String>(); // Temporary list to hold list array for parsing
+    private String TAG = "myDebug";
+    private String myUID, myFavorites = "", myFavorite_listview = "";
+    private int favCounter = 0; // Counter to ensure starting favorites only inputted once
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -70,8 +80,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         myName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         getSupportActionBar().setTitle("Welcome " + myName);
         //getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -92,8 +102,7 @@ public class MainActivity extends AppCompatActivity {
         mSwipeView = (SwipePlaceHolderView)findViewById(R.id.swipeView);
         mContext = getApplicationContext();
         bucketList_text = (TextView) findViewById(R.id.bList_text);
-
-
+        myUID = mAuth.getCurrentUser().getUid();
 
         int bottomMargin = Utils.dpToPx(160);
         Point windowSize = Utils.getDisplaySize(getWindowManager());
@@ -179,10 +188,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mSwipeView.doSwipe(true);
-
-                test+= "\n";
-                test += myList.get(counter).toString() + "\n";
-                update();
+                String newFav;
+                newFav = myList.get(counter).toString() + ",";
+                addFavorite(newFav);
                 counter++;
             }
         });
@@ -203,12 +211,36 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Iterates through firebase database
+        mDatabase.child(myUID).addValueEventListener(new ValueEventListener() {
 
+            // Invokes anytime data on database changes, as well as oncreate for initial snapshot
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // get all children defined in above child
+                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+                String favs; // not necessary, but used as a saftey string
+
+                for(DataSnapshot child : children) {
+                        // Only add favorites at start once, since this method is repeated many times
+                        if(favCounter <= 0) {
+                            favs = child.getValue().toString();
+                            getFavorites(favs);
+                        }
+
+                        favCounter++;
+                }
+
+                // This increment is for when user has no favorites. Skips a double input of the first favorite
+                favCounter++;
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
     }
-    public void update()
-    {
-        bucketList_text.setText(test);
-    }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -264,4 +296,53 @@ public class MainActivity extends AppCompatActivity {
 
         }
     };
+
+    // Add a new favorite to the list
+    private void addFavorite(String newFavorite) {
+
+        boolean favoriteExists = false;
+
+        // Check if incoming favorite is already in user's favorites
+        if(myFavorites.toLowerCase().contains(newFavorite.toLowerCase()))
+            favoriteExists = true;
+
+        if(favoriteExists == false) {
+            myFavorites += newFavorite;
+            mDatabase.child(myUID).child("Favorites").setValue(myFavorites);
+            updateFavorites();
+        } else
+            Toast.makeText(MainActivity.this, "You've already favorited this!", Toast.LENGTH_SHORT).show();
+    }
+
+    // Get favorites when logging in
+    private void getFavorites(String favs) {
+        tempList = parseFavorites(favs);
+
+        // Break favs into individual inputs
+        for (int i = 0; i < tempList.size(); i++) {
+            myFavorites += tempList.get(i) + ",";
+            myFavorite_listview += tempList.get(i) + "\n";
+        }
+
+        bucketList_text.setText(myFavorite_listview);
+    }
+
+    // Update favorites list
+    public void updateFavorites() {
+        tempList = parseFavorites(myFavorites);
+
+        // Reset myFavorite_listview
+        myFavorite_listview = "";
+
+        for (int i = 0; i < tempList.size(); i++)
+            myFavorite_listview += tempList.get(i) + "\n";
+
+        bucketList_text.setText(myFavorite_listview);
+    }
+
+    // Function to parse user's favorites (string)
+    private List<String> parseFavorites(String incomingFavorites){
+        List<String> parsedList = new ArrayList<String>(Arrays.asList(incomingFavorites.split(",")));
+        return parsedList;
+    }
 }
