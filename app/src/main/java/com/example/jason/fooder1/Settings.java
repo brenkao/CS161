@@ -106,13 +106,8 @@ public class Settings extends AppCompatActivity{
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 progress = i;
                 miles.setText(progress + " miles");
-<<<<<<< HEAD
                 //distance.setText( progress + "miles");
-=======
-               //distance.setText( progress + "miles");
                 intent.putExtra("seekBar", progress);
->>>>>>> master
-
             }
 
             @Override
@@ -186,17 +181,11 @@ public class Settings extends AppCompatActivity{
             }
 
         });
-<<<<<<< HEAD
-        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean b) {
-=======
 
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 ratingNumber = rating;
->>>>>>> master
             }
         });
         }
