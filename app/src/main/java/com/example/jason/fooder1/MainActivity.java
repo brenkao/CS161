@@ -66,16 +66,14 @@ public class MainActivity extends AppCompatActivity {
     private LocationManager lm;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-<<<<<<< HEAD
     private DatabaseReference mDatabase;
 
     private List<String> tempList = new ArrayList<String>(); // Temporary list to hold list array for parsing
     private String TAG = "myDebug";
     private String myUID, myFavorites = "", myFavorite_listview = "";
     private int favCounter = 0; // Counter to ensure starting favorites only inputted once
-=======
     private List<String> bus;
->>>>>>> origin/temporary_master
+
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -92,16 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
         Toast.makeText(MainActivity.this, "RESTARTING", Toast.LENGTH_SHORT).show();
     }
-    public void update()
-    {
-        bucketList_text.setText(test);
-    }
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        mAuth.addAuthStateListener(mAuthListener);
-    }
+
     // Doesn't work yet
     public void change() {
         Toast.makeText(MainActivity.this, "Button Pressed",
@@ -109,54 +98,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, BucketList.class);
         startActivity(intent);
     }
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case MY_PERMISSIONS_ACCESS_FINE_LOCATION: {
 
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                } else {
-
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                }
-                return;
-            }
-
-<<<<<<< HEAD
-=======
-            // other 'case' lines to check for other
-            // permissions this app might request
-        }
-    }
-    private final LocationListener ll = new LocationListener() {
-        @Override
-        public void onLocationChanged(Location location) {
-            latitude = location.getLatitude();
-            longitude = location.getLongitude();
-        }
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-
-        }
-
-        @Override
-        public void onProviderEnabled(String provider) {
-
-        }
-
-        @Override
-        public void onProviderDisabled(String provider) {
-
-        }
-    };
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void startFooder()
     {
->>>>>>> origin/temporary_master
         myName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -313,7 +258,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-<<<<<<< HEAD
 
         // Iterates through firebase database
         mDatabase.child(myUID).addValueEventListener(new ValueEventListener() {
@@ -351,13 +295,7 @@ public class MainActivity extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         mAuth.addAuthStateListener(mAuthListener);
     }
-    // Doesn't work yet
-    public void change() {
-        Toast.makeText(MainActivity.this, "Button Pressed",
-                Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, BucketList.class);
-        startActivity(intent);
-    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
@@ -449,7 +387,5 @@ public class MainActivity extends AppCompatActivity {
         List<String> parsedList = new ArrayList<String>(Arrays.asList(incomingFavorites.split(",")));
         return parsedList;
     }
-=======
-    }
->>>>>>> origin/temporary_master
+
 }

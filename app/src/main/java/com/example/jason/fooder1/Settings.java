@@ -165,16 +165,10 @@ public class Settings extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 mAuth.signOut();
-<<<<<<< HEAD
-            }
-        });
-    }
-=======
                 Intent i = new Intent(Settings.this, LoginPage.class);
                 startActivity(i);
-                }
-
-            });
+            }
+        });
         fooder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -182,9 +176,12 @@ public class Settings extends AppCompatActivity{
             }
 
         });
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean b) {
+            }
+        });
         }
-
->>>>>>> origin/temporary_master
 }
 
 
