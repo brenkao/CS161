@@ -16,7 +16,6 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -67,19 +66,97 @@ public class MainActivity extends AppCompatActivity {
     private LocationManager lm;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+<<<<<<< HEAD
     private DatabaseReference mDatabase;
 
     private List<String> tempList = new ArrayList<String>(); // Temporary list to hold list array for parsing
     private String TAG = "myDebug";
     private String myUID, myFavorites = "", myFavorite_listview = "";
     private int favCounter = 0; // Counter to ensure starting favorites only inputted once
+=======
+    private List<String> bus;
+>>>>>>> origin/temporary_master
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        startFooder();
+    }
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        finish();
+        startActivity(getIntent());
 
+        Toast.makeText(MainActivity.this, "RESTARTING", Toast.LENGTH_SHORT).show();
+    }
+    public void update()
+    {
+        bucketList_text.setText(test);
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+    // Doesn't work yet
+    public void change() {
+        Toast.makeText(MainActivity.this, "Button Pressed",
+                Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, BucketList.class);
+        startActivity(intent);
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_ACCESS_FINE_LOCATION: {
+
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+<<<<<<< HEAD
+=======
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
+    }
+    private final LocationListener ll = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+    };
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public void startFooder()
+    {
+>>>>>>> origin/temporary_master
         myName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -130,16 +207,16 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         else {
-            lm = (LocationManager) getSystemService(LOCATION_SERVICE);
-            location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            location = lm.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
             latitude = location.getLatitude();
             longitude = location.getLongitude();
 
-            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0 , ll);
-            lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0 , ll);
+
+//            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0 , ll);
+//            lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0 , ll);
 
         }
-        Log.d("test", String.valueOf(longitude));
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
@@ -157,10 +234,36 @@ public class MainActivity extends AppCompatActivity {
             params.put("latitude", String.valueOf(latitude));
             params.put("longitude", String.valueOf(longitude));
             params.put("term", "restaurants");
-            params.put("radius_filter", "8000");
+            int radius = getIntent().getExtras().getInt("seekBar");
+            radius = (int) (radius * 1609.34);
+            params.put("radius", String.valueOf(radius));
+            String price = "";
+            boolean price1 = getIntent().getExtras().getBoolean("price1");
+            boolean price2 = getIntent().getExtras().getBoolean("price2");
+            boolean price3 = getIntent().getExtras().getBoolean("price3");
+            boolean price4 = getIntent().getExtras().getBoolean("price4");
+
+            if(price1) {
+                price += "1,";
+            }
+            if(price2) {
+                price +="2,";
+            }
+            if(price3) {
+                price +="3,";
+            }
+            if(price4) {
+                price +="4,";
+            }
+            if(price.endsWith(",")) {
+                price = price.substring(0, price.length()-1);
+            }
+            if(price1 || price2 || price3 || price4){
+                params.put("price", price);
+            }
             Call<SearchResponse> searchCall = yelp.search(params);
             searchResponse = searchCall.execute().body();
-            List<String> bus = Utils.loadProfiles();
+            bus = Utils.loadProfiles();
             for (int i = 0; i < bus.size();i++) {
                 try {
                     TinderCard tc = new TinderCard(mContext, bus.get(i), mSwipeView);
@@ -207,9 +310,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Settings.class);
                 //intent.setClass(android.content.Intent.ACTION_VIEW, Settings.class);
-               startActivity(intent);
+                startActivity(intent);
             }
         });
+<<<<<<< HEAD
 
         // Iterates through firebase database
         mDatabase.child(myUID).addValueEventListener(new ValueEventListener() {
@@ -345,4 +449,7 @@ public class MainActivity extends AppCompatActivity {
         List<String> parsedList = new ArrayList<String>(Arrays.asList(incomingFavorites.split(",")));
         return parsedList;
     }
+=======
+    }
+>>>>>>> origin/temporary_master
 }

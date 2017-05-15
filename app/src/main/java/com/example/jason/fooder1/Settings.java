@@ -5,11 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.RadioButton;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.RatingBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Button;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -34,15 +35,22 @@ public class Settings extends AppCompatActivity{
 
     private RatingBar ratingBar;
     private SeekBar seekBar;
-    private double progress;
+    private int progress;
 
-    private RadioButton radio1;
-    private RadioButton radio2;
-    private RadioButton radio3;
-    private RadioButton radio4;
-    private RadioButton radio5;
+    public CheckBox check1;
+    public CheckBox check2;
+    public CheckBox check3;
+    public CheckBox check4;
+
+    public boolean price1 = false;
+    public boolean price2 = false;
+    public boolean price3 = false;
+    public boolean price4 = false;
+
+    public Intent intent;
 
     private Button signout;
+    private Button fooder;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -76,13 +84,18 @@ public class Settings extends AppCompatActivity{
         progress = seekBar.getProgress();
         miles.setText(progress + "miles");
 
-        radio1 = (RadioButton) findViewById(R.id.radio1);
-        radio2 = (RadioButton) findViewById(R.id.radio2);
-        radio3 = (RadioButton) findViewById(R.id.radio3);
-        radio4 = (RadioButton) findViewById(R.id.radio4);
-        radio5 = (RadioButton) findViewById(R.id.radio5);
+        check1 = (CheckBox) findViewById(R.id.check1);
+        check2 = (CheckBox) findViewById(R.id.check2);
+        check3 = (CheckBox) findViewById(R.id.check3);
+        check4 = (CheckBox) findViewById(R.id.check4);
 
-        signout = (Button) findViewById(com.example.jason.fooder1.R.id.signout);
+        check1.setChecked(false);
+        check2.setChecked(false);
+        check3.setChecked(false);
+        check4.setChecked(false);
+
+        signout = (Button) findViewById(R.id.signout);
+        fooder = (Button) findViewById(R.id.fooder);
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -104,13 +117,74 @@ public class Settings extends AppCompatActivity{
             }
         });
 
+        intent = new Intent(Settings.this, MainActivity.class);
+        intent.putExtra("price1", price1);
+        intent.putExtra("price2", price2);
+        intent.putExtra("price3", price3);
+        intent.putExtra("price4", price4);
+        intent.putExtra("seekBar", progress);
+
+        check1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                price1 = isChecked;
+
+                intent.putExtra("price1", price1);
+            }
+        });
+        check2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                price2 = isChecked;
+
+                intent.putExtra("price2", price2);
+            }
+        });
+        check3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                price3 = isChecked;
+
+                intent.putExtra("price3", price3);
+            }
+        });
+        check4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                price4 = isChecked;
+
+                intent.putExtra("price4", price4);
+            }
+        });
+
         signout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mAuth.signOut();
+<<<<<<< HEAD
             }
         });
     }
+=======
+                Intent i = new Intent(Settings.this, LoginPage.class);
+                startActivity(i);
+                }
+
+            });
+        fooder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               startActivity(intent);
+            }
+
+        });
+        }
+
+>>>>>>> origin/temporary_master
 }
 
 

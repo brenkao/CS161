@@ -58,61 +58,61 @@
         android:text="Price:"
         android:textAppearance="@style/TextAppearance.AppCompat" />
 
-    <RadioButton
-        android:id="@+id/radio1"
+    <CheckBox
+        android:id="@+id/check1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/price"
-        android:layout_alignStart="@+id/price"
         android:layout_below="@+id/price"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf="@+id/price"
+        android:layout_toRightOf="@+id/price"
+        android:checked="false"
         android:text="$" />
 
-    <RadioButton
-        android:id="@+id/radio2"
+    <CheckBox
+        android:id="@+id/check2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="$$"
-        android:layout_alignBaseline="@+id/radio1"
-        android:layout_alignBottom="@+id/radio1"
-        android:layout_alignLeft="@+id/seekBar"
-        android:layout_alignStart="@+id/seekBar" />
+        android:layout_alignBaseline="@+id/check1"
+        android:layout_alignBottom="@+id/check1"
+        android:layout_toLeftOf="@+id/check3"
+        android:layout_toStartOf="@+id/check3"
+        android:layout_marginRight="20dp"
+        android:layout_marginEnd="20dp"
+        android:checked="false" />
 
-    <RadioButton
-        android:id="@+id/radio3"
+    <CheckBox
+        android:id="@+id/check3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="$$$"
-        android:layout_alignBaseline="@+id/radio2"
-        android:layout_alignBottom="@+id/radio2"
-        android:layout_toRightOf="@+id/radio2"
-        android:layout_toEndOf="@+id/radio2"
-        android:layout_marginLeft="19dp"
-        android:layout_marginStart="19dp" />
+        android:layout_alignBaseline="@+id/check2"
+        android:layout_alignBottom="@+id/check2"
+        android:layout_alignRight="@+id/seekBar"
+        android:layout_alignEnd="@+id/seekBar"
+        android:checked="false" />
 
-    <RadioButton
-        android:id="@+id/radio4"
+    <CheckBox
+        android:id="@+id/check4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="$$$$"
-        android:layout_alignBaseline="@+id/radio3"
-        android:layout_alignBottom="@+id/radio3"
-        android:layout_toRightOf="@+id/radio3"
-        android:layout_toEndOf="@+id/radio3"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp" />
+        android:layout_alignBaseline="@+id/check3"
+        android:layout_alignBottom="@+id/check3"
+        android:layout_alignLeft="@+id/miles"
+        android:layout_alignStart="@+id/miles"
+        android:checked="false" />
 
-    <RadioButton
-        android:id="@+id/radio5"
+    <Button
+        android:id="@+id/fooder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/radio4"
-        android:layout_alignBottom="@+id/radio4"
-        android:layout_marginLeft="14dp"
-        android:layout_marginStart="14dp"
-        android:layout_toEndOf="@+id/radio4"
-        android:layout_toRightOf="@+id/radio4"
-        android:text="$$$$$" />
+        android:layout_alignBaseline="@+id/signout"
+        android:layout_alignBottom="@+id/signout"
+        android:layout_toLeftOf="@+id/settings"
+        android:layout_toStartOf="@+id/settings"
+        android:text="Fooder" />
 
     <Button
         android:id="@+id/signout"
