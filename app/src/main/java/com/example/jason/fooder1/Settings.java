@@ -33,6 +33,7 @@ public class Settings extends AppCompatActivity{
     private RatingBar ratingBar;
     private SeekBar seekBar;
     private int progress;
+    public float ratingNumber;
 
     public CheckBox check1;
     public CheckBox check2;
@@ -78,8 +79,11 @@ public class Settings extends AppCompatActivity{
 
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         seekBar = (SeekBar) findViewById(R.id.seekBar);
+
+        ratingBar.setRating(3);
         progress = seekBar.getProgress();
         miles.setText(progress + "miles");
+        ratingNumber = ratingBar.getRating();
 
         check1 = (CheckBox) findViewById(R.id.check1);
         check2 = (CheckBox) findViewById(R.id.check2);
@@ -121,6 +125,7 @@ public class Settings extends AppCompatActivity{
         intent.putExtra("price3", price3);
         intent.putExtra("price4", price4);
         intent.putExtra("seekBar", progress);
+        intent.putExtra("rating", ratingNumber);
 
         check1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -174,6 +179,13 @@ public class Settings extends AppCompatActivity{
                startActivity(intent);
             }
 
+        });
+
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                ratingNumber = rating;
+            }
         });
         }
 

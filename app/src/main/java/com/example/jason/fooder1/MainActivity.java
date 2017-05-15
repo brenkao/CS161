@@ -226,6 +226,12 @@ public class MainActivity extends AppCompatActivity {
             boolean price2 = getIntent().getExtras().getBoolean("price2");
             boolean price3 = getIntent().getExtras().getBoolean("price3");
             boolean price4 = getIntent().getExtras().getBoolean("price4");
+            float rating = getIntent().getExtras().getFloat("rating");
+            //params.put("sort_by", String.valueOf(rating));
+
+            if(getIntent().getExtras().getFloat("ratingNumber") >= 4)
+                params.put("sort_by", "rating");
+
 
             if(price1) {
                 price += "1,";
