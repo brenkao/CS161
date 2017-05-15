@@ -109,6 +109,12 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
             }
+
+            // Select user after signout
+
+            if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
+                Auth.GoogleSignInApi.signOut(mGoogleApiClient);
+            }
         }
     }
 
