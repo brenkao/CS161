@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         startFooder();
+        Log.d(TAG, "MAIN_ACTIVTY");
     }
     @Override
     protected void onRestart(){

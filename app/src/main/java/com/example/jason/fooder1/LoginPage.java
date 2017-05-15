@@ -67,8 +67,6 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if(firebaseAuth.getCurrentUser() != null)
-                    startActivity(new Intent(LoginPage.this, MainActivity.class));
                 if(firebaseAuth.getCurrentUser() != null) {
                     Toast.makeText(LoginPage.this, "Logged in", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(LoginPage.this, Settings.class));
@@ -111,6 +109,8 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
             }
+
+            // Select user after signout
 
             if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
                 Auth.GoogleSignInApi.signOut(mGoogleApiClient);
