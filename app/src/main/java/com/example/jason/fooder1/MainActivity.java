@@ -16,6 +16,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -193,8 +194,16 @@ public class MainActivity extends AppCompatActivity {
         else {
             lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             location = lm.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
-            latitude = location.getLatitude();
-            longitude = location.getLongitude();
+
+            if(location == null) {
+                latitude = 37.3351874;
+                longitude = -121.88107150000002;
+            }
+            else
+            {
+                latitude = location.getLatitude();
+                longitude = location.getLongitude();
+            }
 
 
 //            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0 , ll);
@@ -221,6 +230,7 @@ public class MainActivity extends AppCompatActivity {
             int radius = getIntent().getExtras().getInt("seekBar");
             radius = (int) (radius * 1609.34);
             params.put("radius", String.valueOf(radius));
+            Log.d("test", String.valueOf(radius));
             String price = "";
             boolean price1 = getIntent().getExtras().getBoolean("price1");
             boolean price2 = getIntent().getExtras().getBoolean("price2");
@@ -231,7 +241,8 @@ public class MainActivity extends AppCompatActivity {
 
             if(getIntent().getExtras().getFloat("ratingNumber") >= 4)
                 params.put("sort_by", "rating");
-
+            if(radius <= 8100)
+                params.put("sort_by", "distance");
 
             if(price1) {
                 price += "1,";

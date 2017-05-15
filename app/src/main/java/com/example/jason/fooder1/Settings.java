@@ -105,6 +105,7 @@ public class Settings extends AppCompatActivity{
                 progress = i;
                 miles.setText(progress + " miles");
                //distance.setText( progress + "miles");
+                intent.putExtra("seekBar", progress);
 
             }
 
