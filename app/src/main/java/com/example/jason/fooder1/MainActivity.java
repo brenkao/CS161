@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.jason.fooder1.pojo.AccessToken;
 import com.example.jason.fooder1.pojo.SearchResponse;
 import com.google.firebase.auth.FirebaseAuth;
@@ -93,7 +94,13 @@ public class MainActivity extends AppCompatActivity {
         //Reset counter
         counter=-1;
         myName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+        Prof_Pic2 = (ImageView)findViewById(R.id.prof_pic2);
+        if(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl() != null){
+            String img_url = FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl().toString();
+            Glide.with(this).load(img_url).into(Prof_Pic2);
+        }
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
 
         getSupportActionBar().setTitle("Welcome " + myName);
         //getSupportActionBar().setDisplayShowTitleEnabled(false);
