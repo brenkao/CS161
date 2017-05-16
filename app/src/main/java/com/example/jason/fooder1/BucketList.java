@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -30,8 +29,6 @@ public class BucketList extends AppCompatActivity {
     private String TAG = "myDebug";
     private String myUID, myFavorites = "", myFavorite_listview = "";
     private int favCounter = 0; // Counter to ensure starting favorites only inputted once
-    private List<String> bus;
-    private ArrayList myList;
     private Button back_button;
     private TextView bucketList_text;
 
@@ -42,7 +39,6 @@ public class BucketList extends AppCompatActivity {
 
         bucketList_text = (TextView) findViewById(R.id.bucketlist_text);
         back_button = (Button) findViewById(R.id.back_button);
-        myList = new ArrayList();
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();

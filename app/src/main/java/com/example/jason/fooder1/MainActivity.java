@@ -19,7 +19,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -50,12 +49,9 @@ public class MainActivity extends AppCompatActivity {
     private Context mContext;
     private ImageView Prof_Pic2;
     private String myName;
-    private String myEmail;
-    private String list;
     private static final String CLIENT_ID = "uX4P1ceVg4_kfsi-miohDA"; // ENTER CLIENT_ID
     private static final String CLIENT_SECRET = "4fOdvNkltK7LWrf4poQkEhBgUVGDJKk86oziaMIjgiiFsIyVmQlVaART0jhFtMDO"; // ENTER CLIENT_SECRET
     public static SearchResponse searchResponse;
-    private TextView bucketList_text;
     private ArrayList myList = new ArrayList();
     private ArrayList<String> addressList = new ArrayList();
     public static int counter=-1;
@@ -103,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         getSupportActionBar().setTitle("Welcome " + myName);
-        //getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.drawable.ic_icon);
 
@@ -120,7 +115,6 @@ public class MainActivity extends AppCompatActivity {
 
         mSwipeView = (SwipePlaceHolderView)findViewById(R.id.swipeView);
         mContext = getApplicationContext();
-        bucketList_text = (TextView) findViewById(R.id.bList_text);
         myUID = mAuth.getCurrentUser().getUid();
 
         int bottomMargin = Utils.dpToPx(160);
@@ -171,7 +165,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-
         StrictMode.setThreadPolicy(policy);
 
         assert (CLIENT_ID != null && CLIENT_SECRET != null);
@@ -182,7 +175,6 @@ public class MainActivity extends AppCompatActivity {
         try {
             final AccessToken accessToken = factory.getAccessToken().execute().body();
             final YelpV3API yelp = factory.getAPI(accessToken.access_token);
-            //params.put("location", SAMPLE_LOCATION);
             params.put("latitude", String.valueOf(latitude));
             params.put("longitude", String.valueOf(longitude));
             params.put("term", "restaurants");
@@ -194,12 +186,10 @@ public class MainActivity extends AppCompatActivity {
             boolean price2 = getIntent().getExtras().getBoolean("price2");
             boolean price3 = getIntent().getExtras().getBoolean("price3");
             boolean price4 = getIntent().getExtras().getBoolean("price4");
-            float rating = getIntent().getExtras().getFloat("rating");
-            //params.put("sort_by", String.valueOf(rating));
 
             if(getIntent().getExtras().getFloat("ratingNumber") >= 4)
                 params.put("sort_by", "rating");
-            if(radius <= 8100)
+            if(radius <= 8100) //if radius is less than 5 miles (5*1609.34 = 8000)
                 params.put("sort_by", "distance");
 
             if(price1) {
@@ -253,6 +243,7 @@ public class MainActivity extends AppCompatActivity {
                 addFavorite(newFav);
             }
         });
+        /* Opens Google maps intent with current restaurant location */
         findViewById(R.id.mapBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -261,17 +252,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        /*Opens Settings page */
         findViewById(R.id.prof_pic2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Settings.class);
-                //intent.setClass(android.content.Intent.ACTION_VIEW, Settings.class);
                 startActivity(intent);
             }
         });
 
 
-        // Iterates through firebase database
+        /* Iterates through firebase database */
         mDatabase.child(myUID).addValueEventListener(new ValueEventListener() {
 
             // Invokes anytime data on database changes, as well as oncreate for initial snapshot
@@ -378,8 +369,6 @@ public class MainActivity extends AppCompatActivity {
             myFavorites += tempList.get(i) + ",";
             myFavorite_listview += tempList.get(i) + "\n";
         }
-
-        //bucketList_text.setText(myFavorite_listview);
     }
 
     // Update favorites list
