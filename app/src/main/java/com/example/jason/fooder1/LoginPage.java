@@ -67,11 +67,8 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if(firebaseAuth.getCurrentUser() != null) {
-                    Toast.makeText(LoginPage.this, "Logged in", Toast.LENGTH_SHORT).show();
+                if(firebaseAuth.getCurrentUser() != null)
                     startActivity(new Intent(LoginPage.this, Settings.class));
-                } else
-                    Toast.makeText(LoginPage.this, "Logged Out", Toast.LENGTH_SHORT).show();
             }
         };
 
@@ -149,19 +146,6 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         // An unresolvable error has occurred and Google APIs (including Sign-In) will not be available.
         Log.d(TAG, "onConnectionFailed:" + connectionResult);
         Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
-    }
-
-    private void handleResult(GoogleSignInResult result) {
-        if(result.isSuccess()) {
-            GoogleSignInAccount account = result.getSignInAccount();
-            if (account.getPhotoUrl() != null) {
-                String img_url = account.getPhotoUrl().toString();
-                Glide.with(this).load(img_url).into(Prof_Pic);
-            }
-        }
-
-        Intent intent = new Intent(LoginPage.this, MainActivity.class);
-        startActivity(intent);
     }
 
     @Override
