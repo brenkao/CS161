@@ -16,7 +16,6 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -183,7 +182,6 @@ public class MainActivity extends AppCompatActivity {
             int radius = getIntent().getExtras().getInt("seekBar");
             radius = (int) (radius * 1609.34);
             params.put("radius", String.valueOf(radius));
-            Log.d("test", String.valueOf(radius));
             String price = "";
             boolean price1 = getIntent().getExtras().getBoolean("price1");
             boolean price2 = getIntent().getExtras().getBoolean("price2");
