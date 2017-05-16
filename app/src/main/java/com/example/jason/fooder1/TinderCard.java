@@ -60,11 +60,11 @@ public class TinderCard {
         distance = distance * milesConvert;
 
 
+
     }
 
     @Resolve
-    private void onResolved() throws JSONException{
-
+    public void onResolved() throws JSONException{
 
         Glide.with(mContext).load(mBusiness2.getString("image_url")).into(profileImageView);
         namePriceTxt.setText(mBusiness2.getString("name") + ", " + mBusiness2.getString("price") + ", " + String.format("%.2f", distance) + " miles");
@@ -78,7 +78,8 @@ public class TinderCard {
     }
 
     @SwipeIn
-    private void onSwipeIn() {
+    public void onSwipeIn() {
+        MainActivity.counter++;
         Log.d("EVENT", "onSwipedIn");
     }
 
@@ -88,7 +89,10 @@ public class TinderCard {
     }
 
     @SwipeOut
-    private void onSwipedOut(){ Log.d("EVENT", "onSwipedOut"); }
+    public void onSwipedOut(){
+        MainActivity.counter++;
+        Log.d("EVENT", "onSwipedOut");
+    }
     @SwipeInState
     private void onSwipeInState(){
         Log.d("EVENT", "onSwipeInState");

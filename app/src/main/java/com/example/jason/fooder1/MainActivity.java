@@ -19,7 +19,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView bucketList_text;
     private ArrayList myList = new ArrayList();
     private ArrayList<String> addressList = new ArrayList();
-    private int counter = 0;
+    public static int counter=-1;
     private double longitude = 1;
     private double latitude = 1;
     private Location location;
@@ -74,8 +73,7 @@ public class MainActivity extends AppCompatActivity {
     private String myUID, myFavorites = "", myFavorite_listview = "";
     private int favCounter = 0; // Counter to ensure starting favorites only inputted once
     private List<String> bus;
-
-
+    private TinderCard tc;
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +102,8 @@ public class MainActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void startFooder()
     {
+        //Reset counter
+        counter=-1;
         myName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -157,10 +157,12 @@ public class MainActivity extends AppCompatActivity {
             lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             location = lm.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
 
+            //Default San Jose State
             if(location == null) {
                 latitude = 37.3351874;
                 longitude = -121.88107150000002;
             }
+            //Get current location from google maps
             else
             {
                 latitude = location.getLatitude();
@@ -229,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
             bus = Utils.loadProfiles();
             for (int i = 0; i < bus.size();i++) {
                 try {
-                    TinderCard tc = new TinderCard(mContext, bus.get(i), mSwipeView);
+                    tc = new TinderCard(mContext, bus.get(i), mSwipeView);
                     addressList.add(tc.getAddress());
                     myList.add(tc.getName());
                     mSwipeView.addView(tc);
@@ -241,12 +243,10 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         findViewById(R.id.rejectBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mSwipeView.doSwipe(false);
-                counter++;
             }
         });
 
@@ -257,7 +257,6 @@ public class MainActivity extends AppCompatActivity {
                 String newFav;
                 newFav = myList.get(counter).toString() + ",";
                 addFavorite(newFav);
-                counter++;
             }
         });
         findViewById(R.id.mapBtn).setOnClickListener(new View.OnClickListener() {
@@ -276,6 +275,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
 
         // Iterates through firebase database
         mDatabase.child(myUID).addValueEventListener(new ValueEventListener() {
