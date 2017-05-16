@@ -80,23 +80,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         startFooder();
-        Log.d(TAG, "MAIN_ACTIVTY");
     }
     @Override
     protected void onRestart(){
         super.onRestart();
         finish();
         startActivity(getIntent());
-
-        Toast.makeText(MainActivity.this, "RESTARTING", Toast.LENGTH_SHORT).show();
-    }
-
-    // Doesn't work yet
-    public void change() {
-        Toast.makeText(MainActivity.this, "Button Pressed",
-                Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, BucketList.class);
-        startActivity(intent);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -384,7 +373,7 @@ public class MainActivity extends AppCompatActivity {
             myFavorite_listview += tempList.get(i) + "\n";
         }
 
-        bucketList_text.setText(myFavorite_listview);
+        //bucketList_text.setText(myFavorite_listview);
     }
 
     // Update favorites list

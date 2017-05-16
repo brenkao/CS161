@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -44,8 +45,8 @@
         android:progress="10"
         android:layout_below="@+id/distance"
         android:layout_toRightOf="@+id/distance"
-        android:layout_alignRight="@+id/signout"
-        android:layout_alignEnd="@+id/signout" />
+        android:layout_alignRight="@+id/fooder"
+        android:layout_alignEnd="@+id/fooder" />
 
     <TextView
         android:id="@+id/price"
@@ -108,11 +109,11 @@
         android:id="@+id/fooder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Fooder"
         android:layout_alignBaseline="@+id/signout"
         android:layout_alignBottom="@+id/signout"
         android:layout_toLeftOf="@+id/settings"
-        android:layout_toStartOf="@+id/settings"
-        android:text="Fooder" />
+        android:layout_toStartOf="@+id/settings" />
 
     <Button
         android:id="@+id/signout"
@@ -122,6 +123,15 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="48dp"
         android:text="SIGN OUT" />
+
+    <Button
+        android:id="@+id/bucketlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/check4"
+        android:layout_alignStart="@+id/check4"
+        android:text="BUCKETLIST"
+        android:layout_alignBottom="@+id/signout" />
 
     <TextView
         android:id="@+id/settings"

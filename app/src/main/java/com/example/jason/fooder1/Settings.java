@@ -13,10 +13,7 @@ import android.widget.RatingBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.FirebaseAuth;
 
 /**
@@ -53,6 +50,7 @@ public class Settings extends AppCompatActivity{
 
     private Button signout;
     private Button fooder;
+    private Button bucketlist;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -63,7 +61,6 @@ public class Settings extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
-        Log.d("myDebug", "SETTINGS");
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -101,6 +98,7 @@ public class Settings extends AppCompatActivity{
 
         signout = (Button) findViewById(R.id.signout);
         fooder = (Button) findViewById(R.id.fooder);
+        bucketlist = (Button) findViewById(R.id.bucketlist);
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -179,6 +177,14 @@ public class Settings extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                startActivity(intent);
+            }
+
+        });
+        bucketlist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent cya = new Intent(Settings.this, BucketList.class);
+                startActivity(cya);
             }
 
         });
