@@ -364,6 +364,7 @@ public class MainActivity extends AppCompatActivity {
             myFavorites += newFavorite;
             mDatabase.child(myUID).child("Favorites").setValue(myFavorites);
             updateFavorites();
+            Toast.makeText(MainActivity.this, "Favorited!", Toast.LENGTH_SHORT).show();
         } else
             Toast.makeText(MainActivity.this, "You've already favorited this!", Toast.LENGTH_SHORT).show();
     }
@@ -390,8 +391,6 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i = 0; i < tempList.size(); i++)
             myFavorite_listview += tempList.get(i) + "\n";
-
-        bucketList_text.setText(myFavorite_listview);
     }
 
     // Function to parse user's favorites (string)

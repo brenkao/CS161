@@ -39,14 +39,13 @@
     <SeekBar
         android:id="@+id/seekBar"
         style="@style/Widget.AppCompat.SeekBar.Discrete"
-        android:layout_width="wrap_content"
+        android:layout_width="175dp"
         android:layout_height="wrap_content"
-        android:max="20"
-        android:progress="10"
+
         android:layout_below="@+id/distance"
         android:layout_toRightOf="@+id/distance"
-        android:layout_alignRight="@+id/fooder"
-        android:layout_alignEnd="@+id/fooder" />
+        android:max="20"
+        android:progress="10" />
 
     <TextView
         android:id="@+id/price"
@@ -88,11 +87,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="$$$"
-        android:layout_alignBaseline="@+id/check2"
-        android:layout_alignBottom="@+id/check2"
-        android:layout_alignRight="@+id/seekBar"
-        android:layout_alignEnd="@+id/seekBar"
-        android:checked="false" />
+        android:checked="false"
+        android:layout_alignBaseline="@+id/check1"
+        android:layout_alignBottom="@+id/check1"
+        android:layout_toLeftOf="@+id/check4"
+        android:layout_toStartOf="@+id/check4"
+        android:layout_marginRight="11dp"
+        android:layout_marginEnd="11dp" />
 
     <CheckBox
         android:id="@+id/check4"
